@@ -1,0 +1,24 @@
+<section>
+  <div class="page-header">
+    <h1>{{vm1.dispositivo._id ? 'Edit Dispositivo' : 'New Dispositivo'}}</h1>
+  </div>
+  <div class="col-md-12">
+    <form name="vm1.form.dispositivoForm" class="form-horizontal" novalidate>
+      <fieldset>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="name">Name</label>
+          <input name="name" type="text" ng-model="vm1.dispositivo.name" id="name" class="form-control" placeholder="Name" required>
+          <div ng-messages="vm1.form.dispositivoForm.name.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Dispositivo name is required.</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <button type="button" ng-click="vm1.save(vm1.form.dispositivoForm.$valid)" class="btn btn-default">{{vm1.dispositivo._id ? 'Update' : 'Create'}}</button>
+        </div>
+        <div ng-show="vm1.error" class="text-danger">
+          <strong ng-bind="vm1.error"></strong>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</section>

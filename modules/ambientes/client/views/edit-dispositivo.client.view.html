@@ -1,0 +1,27 @@
+<section ng-controller="DispositivoModalEditController as vmEdit">
+  <div class="container-fluid">
+    <div class="modal-header">
+      <h3 class="modal-title">Update Dispositivo: {{dispositivo.name}}</h3>
+    </div>
+    <div class="modal-body">
+      <form name="vmEdit.form.dispositivoForm" class="form-horizontal" ng-submit="vmEdit.save(vmEdit.form.dispositivoForm.$valid); vmModal.ok()" novalidate>
+        <fieldset>
+          <div class="form-group" show-errors>
+            <label class="control-label" for="name">Name</label>
+            <input name="name" type="text" ng-model="vmEdit.dispositivo.name" id="name" class="form-control" placeholder="Name" required>
+            <div ng-messages="vmEdit.form.dispositivoForm.name.$error" role="alert">
+              <p class="help-block error-text" ng-message="required">Dispositivo name is required.</p>
+            </div>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-success btn-lg">{{vmEdit.dispositivo._id ? 'Update' : 'Create'}}</button>
+            <button class="btn btn-warning btn-lg" type="button" ng-click="vmModal.cancel()">Cancel</button>
+          </div>
+          <div ng-show="vmEdit.error" class="text-danger">
+            <strong ng-bind="vmEdit.error"></strong>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</section>

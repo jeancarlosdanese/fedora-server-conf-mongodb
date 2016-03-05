@@ -1,0 +1,22 @@
+<section>
+  <div class="page-header">
+    <h1>Dispositivos</h1>
+  </div>
+  <div class="list-group">
+    <a data-ng-repeat="dispositivo in vm.dispositivos"
+       data-ui-sref="dispositivos.view({ dispositivoId: dispositivo._id })"
+       class="list-group-item">
+      <small class="list-group-item-text">
+        Posted on
+        <span data-ng-bind="dispositivo.created | date:'mediumDate'"></span>
+        by
+        <span data-ng-if="dispositivo.user" data-ng-bind="dispositivo.user.displayName"></span>
+        <span data-ng-if="!dispositivo.user">Deleted User</span>
+      </small>
+      <h4 class="list-group-item-heading" data-ng-bind="dispositivo.name"></h4>
+    </a>
+  </div>
+  <div class="alert alert-warning text-center" data-ng-if="vm.dispositivos.$resolved && !vm.dispositivos.length">
+    No Dispositivos yet, why don't you <a data-ui-sref="dispositivos.create">create one</a>?
+  </div>
+</section>
