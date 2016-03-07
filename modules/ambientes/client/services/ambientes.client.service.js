@@ -27,11 +27,11 @@
     var notify = {};
 
     notify.sendMsg = function(msg, data) {
-      console.log(data);
+      // console.log(data);
       data = data || {};
       $rootScope.$emit(msg, data);
 
-      console.log('message sent!');
+      // console.log('message sent!');
     };
 
     notify.getMsg = function(msg, func, scope) {

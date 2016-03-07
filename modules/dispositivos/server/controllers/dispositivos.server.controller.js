@@ -14,6 +14,7 @@ var path = require('path'),
  */
 exports.create = function(req, res) {
   var dispositivo = new Dispositivo(req.body);
+
   dispositivo.user = req.user;
 
   dispositivo.save(function(err) {

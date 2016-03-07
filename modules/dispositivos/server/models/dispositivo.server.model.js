@@ -10,11 +10,37 @@ var mongoose = require('mongoose'),
  * Dispositivo Schema
  */
 var DispositivoSchema = new Schema({
-  name: {
+  numero: {
+    type: Number,
+    min: 1, 
+    max: 99
+  },
+  nome: {
     type: String,
-    default: '',
-    required: 'Please fill Dispositivo name',
-    trim: true
+    trim: true,
+    required: 'Nome não pode ser vazio.'
+  },
+  mac: {
+    type: String,
+    trim: true,
+    required: 'Mac Address não pode ser vazio.',
+    validate: {
+      validator: function(v) {
+        return /^([0-9A-Fa-f]{12})$/.test(v);
+      },
+      message: '{VALUE} não é um Mac Address válido! Ex: 33:af:23:ea:3d:5f'
+    }
+  },
+  ip: {
+    type: String,
+    trim: true,
+    required: 'IP não pode ser vazio.',
+    validate: {
+      validator: function(v) {
+        return /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(v);
+      },
+      message: '{VALUE} não é um um Número de IP válido! Ex: 192.168.1.23'
+    }
   },
   created: {
     type: Date,

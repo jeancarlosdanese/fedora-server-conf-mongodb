@@ -1,24 +1,44 @@
 <section>
-  <div class="page-header">
-    <h1>{{vm1.dispositivo._id ? 'Edit Dispositivo' : 'New Dispositivo'}}</h1>
-  </div>
-  <div class="col-md-12">
-    <form name="vm1.form.dispositivoForm" class="form-horizontal" novalidate>
-      <fieldset>
-        <div class="form-group" show-errors>
-          <label class="control-label" for="name">Name</label>
-          <input name="name" type="text" ng-model="vm1.dispositivo.name" id="name" class="form-control" placeholder="Name" required>
-          <div ng-messages="vm1.form.dispositivoForm.name.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Dispositivo name is required.</p>
+  <div class="container-fluid">
+    <div class="modal-header">
+      <h3 class="modal-title">Update Dispositivo: {{dispositivo.nome}}</h3>
+    </div>
+    <div class="modal-body">
+      <form name="vm.form.dispositivoForm" class="form-horizontal" ng-submit="vm.save(vm.form.dispositivoForm.$valid); vmModal.ok(vm.form.dispositivoForm.$valid)" novalidate>
+        <fieldset>
+          <div class="form-group" show-errors>
+            <label class="control-label" for="nome">Nome</label>
+            <input name="nome" type="text" ng-model="vm.dispositivo.nome" id="nome" class="form-control" placeholder="Nome" required>
+            <div ng-messages="vm.form.dispositivoForm.nome.$error" role="alert">
+              <p class="help-block error-text" ng-message="required">Dispositivo nome is required.</p>
+            </div>
           </div>
-        </div>
-        <div class="form-group">
-          <button type="button" ng-click="vm1.save(vm1.form.dispositivoForm.$valid)" class="btn btn-default">{{vm1.dispositivo._id ? 'Update' : 'Create'}}</button>
-        </div>
-        <div ng-show="vm1.error" class="text-danger">
-          <strong ng-bind="vm1.error"></strong>
-        </div>
-      </fieldset>
-    </form>
+          <div class="form-group" show-errors>
+            <label class="control-label" for="mac">Mac</label>
+            <input name="mac" type="text" ng-model="vm.dispositivo.mac" id="mac" class="form-control" ui-mask="HH:HH:HH:HH:HH:HH" required>
+            <div ng-messages="vm.form.dispositivoForm.mac.$error" role="alert">
+              <p class="help-block error-text" ng-message="required">Dispositivo mac is required.</p>
+            </div>
+          </div>
+          <div class="form-group" show-errors>
+            <label class="control-label" for="ip">IP</label>
+            <input name="ip" type="text" ng-model="vm.dispositivo.ip" id="ip" class="form-control" ng-pattern='/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/' required>
+            <div ng-messages="vm.form.dispositivoForm.ip.$error" role="alert">
+              <p class="help-block error-text" ng-message="required">Dispositivo ip is required.</p>
+            </div>
+            <div ng-messages="vmCreate.form.dispositivoForm.ip.$valid" role="alert">
+              <p class="help-block error-text" ng-message="required">Dispositivo ip is invalid.</p>
+            </div>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-success btn-lg">{{vm.dispositivo._id ? 'Update' : 'Create'}}</button>
+            <button class="btn btn-warning btn-lg" type="button" ng-click="vmModal.cancel()">Cancel</button>
+          </div>
+          <div ng-show="vm.error" class="text-danger">
+            <strong ng-bind="vm.error"></strong>
+          </div>
+        </fieldset>
+      </form>
+    </div>
   </div>
 </section>

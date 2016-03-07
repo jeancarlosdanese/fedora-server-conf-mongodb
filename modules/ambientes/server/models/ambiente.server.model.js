@@ -10,10 +10,15 @@ var mongoose = require('mongoose'),
  * Ambiente Schema
  */
 var AmbienteSchema = new Schema({
-  name: {
+  nome: {
     type: String,
     default: '',
-    required: 'Please fill Ambiente name',
+    trim: true,
+    required: 'Nome do ambiente não pode ser vazio.'
+  },
+  descricao: {
+    type: String,
+    default: '',
     trim: true
   },
   dispositivos: [{

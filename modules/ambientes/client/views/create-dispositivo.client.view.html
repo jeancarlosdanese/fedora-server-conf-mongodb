@@ -1,24 +1,38 @@
-<section ng-controller="DispositivoModalCreateController as vmDispositivo">
+<section ng-controller="DispositivoModalCreateController as vmCreate">
   <div class="container-fluid">
     <div class="modal-header">
       <h3 class="modal-title">New Dispositivo</h3>
     </div>
     <div class="modal-body">
-      <form name="vmDispositivo.form.dispositivoForm" class="form-horizontal" ng-submit="vmDispositivo.save(vmDispositivo.form.dispositivoForm.$valid, vmModal.ambiente); vmModal.ok()" novalidate>
+      <form name="vmCreate.form.dispositivoForm" class="form-horizontal" ng-submit="vmCreate.save(vmCreate.form.dispositivoForm.$valid, vmModal.ambiente); vmModal.ok(vmCreate.form.dispositivoForm.$valid)" novalidate>
         <fieldset>
           <div class="form-group" show-errors>
-            <label class="control-label" for="name">Name</label>
-            <input name="name" type="text" ng-model="vmDispositivo.dispositivo.name" id="name" class="form-control" placeholder="Name" required>
-            <div ng-messages="vmDispositivo.form.dispositivoForm.name.$error" role="alert">
-              <p class="help-block error-text" ng-message="required">Dispositivo name is required.</p>
+            <label class="control-label" for="nome">Nome</label>
+            <input name="nome" type="text" ng-model="vmCreate.dispositivo.nome" id="nome" class="form-control" placeholder="Nome" required>
+            <div ng-messages="vmCreate.form.dispositivoForm.nome.$error" role="alert">
+              <p class="help-block error-text" ng-message="required">Dispositivo nome is required.</p>
+            </div>
+          </div>
+          <div class="form-group" show-errors>
+            <label class="control-label" for="mac">Mac</label>
+            <input name="mac" type="text" ng-model="vmCreate.dispositivo.mac" id="mac" class="form-control" ui-mask="HH:HH:HH:HH:HH:HH" required>
+            <div ng-messages="vmCreate.form.dispositivoForm.mac.$error" role="alert">
+              <p class="help-block error-text" ng-message="required">Dispositivo mac is required.</p>
+            </div>
+          </div>
+          <div class="form-group" show-errors>
+            <label class="control-label" for="ip">IP</label>
+            <input name="ip" type="text" ng-model="vmCreate.dispositivo.ip" id="ip" class="form-control" ng-pattern='/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/' required>
+            <div ng-messages="vmCreate.form.dispositivoForm.ip.$error" role="alert">
+              <p class="help-block error-text" ng-message="required">Dispositivo ip is required.</p>
             </div>
           </div>
           <div class="form-group">
-            <button type="submit" class="btn btn-success btn-lg">{{vmDispositivo.dispositivo._id ? 'Update' : 'Create'}}</button>
+            <button type="submit" class="btn btn-success btn-lg">{{vmCreate.dispositivo._id ? 'Update' : 'Create'}}</button>
             <button class="btn btn-warning btn-lg" type="button" ng-click="vmModal.cancel()">Cancel</button>
           </div>
-          <div ng-show="vmDispositivo.error" class="text-danger">
-            <strong ng-bind="vmDispositivo.error"></strong>
+          <div ng-show="vmCreate.error" class="text-danger">
+            <strong ng-bind="vmCreate.error"></strong>
           </div>
         </fieldset>
       </form>

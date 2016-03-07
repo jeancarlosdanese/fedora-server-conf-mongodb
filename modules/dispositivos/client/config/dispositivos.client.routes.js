@@ -27,7 +27,7 @@
         url: '/create',
         templateUrl: 'modules/dispositivos/client/views/form-dispositivo.client.view.html',
         controller: 'DispositivosController',
-        controllerAs: 'vm1',
+        controllerAs: 'vm',
         resolve: {
           dispositivoResolve: newDispositivo
         },
@@ -40,7 +40,7 @@
         url: '/:dispositivoId/edit',
         templateUrl: 'modules/dispositivos/client/views/form-dispositivo.client.view.html',
         controller: 'DispositivosController',
-        controllerAs: 'vm1',
+        controllerAs: 'vm',
         resolve: {
           dispositivoResolve: getDispositivo
         },
@@ -53,7 +53,7 @@
         url: '/:dispositivoId',
         templateUrl: 'modules/dispositivos/client/views/view-dispositivo.client.view.html',
         controller: 'DispositivosController',
-        controllerAs: 'vm1',
+        controllerAs: 'vm',
         resolve: {
           dispositivoResolve: getDispositivo
         },
