@@ -9,7 +9,7 @@
   DispositivoModalCreateController.$inject = ['$scope', 'DispositivosService', 'Notify'];
 
   function DispositivoModalCreateController ($scope, DispositivosService, Notify) {
-    
+
     var vm = this;
 
     vm.dispositivo = initDispositivo();
@@ -35,7 +35,7 @@
     function save(isValid, ambiente) {
 
       if (!isValid) {
-        $scope.$broadcast('show-errors-check-validity', 'vm.form.dispositivoForm');
+        $scope.$broadcast('show-errors-check-validity', 'vmCreate.form.dispositivoForm');
         return false;
       }
 
@@ -49,8 +49,9 @@
       function successCallback(dispositivo) {
         ambiente.dispositivos = ambiente.dispositivos ? ambiente.dispositivos : [];
         ambiente.dispositivos.push(dispositivo._id);
-        ambiente.$update(function(ambiente){
+        ambiente.$update(function (ambiente) {
           Notify.sendMsg('AtualizarAmbiente', { 'id': ambiente._id });
+          $scope.$parent.vmModal.modalInstance.close();
         }, function(err) {
           console.log(err);
         });
@@ -60,7 +61,7 @@
         vm.error = err.data.message;
       }
     }
-    
+
   }
 
 })();

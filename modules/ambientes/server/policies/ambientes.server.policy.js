@@ -20,6 +20,9 @@ exports.invokeRolesPolicies = function () {
     }, {
       resources: '/api/ambientes/:ambienteId',
       permissions: '*'
+    }, {
+      resources: '/api/dhcpd',
+      permissions: '*'
     }]
   }, {
     roles: ['user'],

@@ -15,14 +15,14 @@
           </div>
           <div class="form-group" show-errors>
             <label class="control-label" for="mac">Mac</label>
-            <input name="mac" type="text" ng-model="vmEdit.dispositivo.mac" id="mac" class="form-control" ui-mask="HH:HH:HH:HH:HH:HH" required>
+            <input name="mac" type="text" ng-model="vmEdit.dispositivo.mac" id="mac" class="form-control" ng-pattern="/^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$/" required>
             <div ng-messages="vmEdit.form.dispositivoForm.mac.$error" role="alert">
               <p class="help-block error-text" ng-message="required">Dispositivo mac is required.</p>
             </div>
           </div>
           <div class="form-group" show-errors>
             <label class="control-label" for="ip">IP</label>
-            <input name="ip" type="text" ng-model="vmEdit.dispositivo.ip" id="ip" class="form-control" ng-pattern='/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/' required>
+            <input name="ip" type="text" ng-model="vmEdit.dispositivo.ip" id="ip" class="form-control" ng-pattern="/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/" required>
             <div ng-messages="vmEdit.form.dispositivoForm.ip.$error" role="alert">
               <p class="help-block error-text" ng-message="required">Dispositivo ip is required.</p>
             </div>

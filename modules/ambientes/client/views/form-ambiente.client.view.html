@@ -1,6 +1,6 @@
 <section>
   <div class="page-header">
-    <h1>{{vm.ambiente._id ? 'Edit Ambiente' : 'New Ambiente'}}</h1>
+    <h1>{{vm.ambiente._id ? 'Edit Ambiente' : 'New Ambiente'}} {{vm.dhcpd}}</h1>
   </div>
   <div class="col-md-12">
     <form name="vm.form.ambienteForm" class="form-horizontal" ng-submit="vm.save(vm.form.ambienteForm.$valid)" novalidate>
@@ -16,6 +16,7 @@
           <button type="submit" class="btn btn-default">{{vm.ambiente._id ? 'Update' : 'Create'}}</button>
           <button type="button" ng-show="vm.ambiente._id" class="btn btn-success text-center" ng-click="vm.modalCreateDispositivo('md', vm.ambiente)">Novo Dispositivo
           </button>
+          <!-- <button type="button" name="button" ng-click="vm.gerarDhcpd()">Gerar Dhcpd</button> -->
         </div>
         <div ng-show="vm.error" class="text-danger">
           <strong ng-bind="vm.error"></strong>

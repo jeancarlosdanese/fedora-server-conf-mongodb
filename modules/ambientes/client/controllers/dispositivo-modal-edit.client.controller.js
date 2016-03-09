@@ -9,7 +9,7 @@
   DispositivoModalEditController.$inject = ['$scope', 'DispositivosService', 'Notify'];
 
   function DispositivoModalEditController ($scope, DispositivosService, Notify) {
-    
+
     var vm = this;
 
     /* pega o dispositivo passado por parametro para modalEditDispositivo */
@@ -30,13 +30,14 @@
 
       function successCallback(dispositivo) {
         Notify.sendMsg('AtualizarDispositivo', { 'id': dispositivo._id });
+        $scope.$parent.vmModal.modalInstance.close();
       }
 
       function errorCallback(err) {
         vm.error = err.data.message;
       }
     }
-    
+
   }
 
 })();

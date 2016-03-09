@@ -18,12 +18,20 @@
     });
   }
 
+  ambientesApp.factory('DhcpdService', DhcpdService);
+
+  DhcpdService.$inject = ['$location'];
+
+  function DhcpdService($location) {
+    // $location.path('/api/dhcpd');
+  }
+
   ambientesApp.factory('Notify', Notify);
 
   Notify.$inject = ['$rootScope'];
 
   function Notify($rootScope) {
-    
+
     var notify = {};
 
     notify.sendMsg = function(msg, data) {

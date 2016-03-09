@@ -19,4 +19,8 @@ module.exports = function(app) {
 
   // Finish by binding the Ambiente middleware
   app.param('ambienteId', ambientes.ambienteByID);
+
+  // app.route('/api/dhcpd').all(ambientesPolicy.isAllowed)
+  //   .post(ambientes.gerar);
+
 };

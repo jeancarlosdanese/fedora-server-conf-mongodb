@@ -6,9 +6,9 @@
     .module('ambientes')
     .controller('AmbientesController', AmbientesController);
 
-  AmbientesController.$inject = ['$scope', '$state', 'Authentication', 'ambienteResolve', 'DispositivosService', '$modal', '$log'];
+  AmbientesController.$inject = ['$scope', '$state', 'Authentication', 'ambienteResolve', 'DispositivosService', '$modal', '$log', 'Dhcpd', '$location', '$http'];
 
-  function AmbientesController ($scope, $state, Authentication, ambiente, DispositivosService, $modal, $log) {
+  function AmbientesController ($scope, $state, Authentication, ambiente, DispositivosService, $modal, $log, Dhcpd, $location, $http) {
     var vm = this;
 
     vm.authentication = Authentication;
@@ -20,6 +20,8 @@
     vm.modalCreateDispositivo = modalCreateDispositivo;
     vm.modalEditDispositivo = modalEditDispositivo;
     vm.removeDispositivo = removeDispositivo;
+    vm.dhcpd = Dhcpd.getMsg();
+    // vm.gerarDhcpd = gerarDhcpd;
 
     vm.animationsEnabled = true;
 
@@ -68,14 +70,14 @@
         controller: function($scope, $modalInstance) {
 
           var vm = this;
-
+          vm.modalInstance = $modalInstance;
           vm.ambiente = ambienteEdit;
 
-          vm.ok = function (isValid) {
-            if(isValid) {
-              $modalInstance.close();  
-            }
-          };
+          // vm.ok = function (isValid) {
+          //   if(isValid && vm.objectValid) {
+          //     $modalInstance.close();
+          //   }
+          // };
 
           vm.cancel = function () {
             $modalInstance.dismiss('cancel');
@@ -101,14 +103,15 @@
         controller: function($scope, $modalInstance) {
 
           var vm = this;
-          
+          vm.modalInstance = $modalInstance;
+
           vm.selectedDispositivo = selectedDispositivo;
 
-          vm.ok = function (isValid) {
-            if(isValid) {
-              $modalInstance.close(vm.selectedDispositivo);  
-            }
-          };
+          // vm.ok = function (isValid) {
+          //   if(isValid) {
+          //     $modalInstance.close(vm.selectedDispositivo);
+          //   }
+          // };
 
           vm.cancel = function () {
             $modalInstance.dismiss('cancel');
@@ -140,6 +143,11 @@
         }
       }
     }
+
+    // function gerarDhcpd() {
+    //   console.log('entror');
+    //   $http.post('/api/dhcpd');
+    // }
 
   }
 
