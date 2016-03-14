@@ -1,29 +1,38 @@
 <section>
   <div class="page-header">
-    <h1>{{vm.ambiente._id ? 'Edit Ambiente' : 'New Ambiente'}} {{vm.dhcpd}}</h1>
+    <h1>{{vm.ambiente._id ? 'Editar ambiente' : 'Novo ambiente'}}</h1>
   </div>
-  <div class="col-md-12">
-    <form name="vm.form.ambienteForm" class="form-horizontal" ng-submit="vm.save(vm.form.ambienteForm.$valid)" novalidate>
-      <fieldset>
-        <div class="form-group" show-errors>
-          <label class="control-label" for="nome">Nome</label>
-          <input name="nome" type="text" ng-model="vm.ambiente.nome" id="nome" class="form-control" placeholder="Nome" required>
-          <div ng-messages="vm.form.ambienteForm.nome.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Ambiente nome is required.</p>
+  <div class="row">
+    <div class="col-md-8">
+      <form name="vm.form.ambienteForm" class="form-horizontal" ng-submit="vm.save(vm.form.ambienteForm.$valid)" novalidate>
+        <fieldset>
+          <div class="form-group" ng-class="{ 'has-error' : vm.form.ambienteForm.nome.$error.required && !vm.form.ambienteForm.nome.$pristine}">
+            <label class="control-label" for="nome">Nome</label>
+            <input name="nome" type="text" ng-model="vm.ambiente.nome" id="nome" class="form-control" placeholder="Nome" required>
+            <div ng-show="vm.form.ambienteForm.nome.$error.required && !vm.form.ambienteForm.nome.$pristine" role="alert">
+              <span class="text-danger">Nome do ambiente é obrigatório.</span>
+            </div>
           </div>
-        </div>
-        <div class="form-group">
-          <button type="submit" class="btn btn-default">{{vm.ambiente._id ? 'Update' : 'Create'}}</button>
-          <button type="button" ng-show="vm.ambiente._id" class="btn btn-success text-center" ng-click="vm.modalCreateDispositivo('md', vm.ambiente)">Novo Dispositivo
-          </button>
-          <!-- <button type="button" name="button" ng-click="vm.gerarDhcpd()">Gerar Dhcpd</button> -->
-        </div>
-        <div ng-show="vm.error" class="text-danger">
-          <strong ng-bind="vm.error"></strong>
-        </div>
-      </fieldset>
-    </form>
-    </br>
-    <dispositivos-list></dispositivos-list>
+          <div class="form-group">
+            <label class="control-label" for="descricao">Descrição</label>
+            <textarea name="descricao" type="text" ng-model="vm.ambiente.descricao" id="descricao" class="form-control" placeholder="Descricao"></textarea>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary">{{vm.ambiente._id ? 'Update' : 'Salvar'}}</button>
+            <button type="button" ng-show="vm.ambiente._id" class="btn btn-success text-center" ng-click="vm.modalCreateDispositivo('md', vm.ambiente)">Novo dispositivo
+            </button>
+          </div>
+          <div ng-show="vm.error" class="text-danger">
+            <strong ng-bind="vm.error"></strong>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+    <div class="hidden-xs hidden-sm col-md-4" >
+      <div class="jumbotron text-center">
+        <i class="fa fa-desktop fa-5x large text-primary"></i>
+      </div>
+    </div>
   </div>
+  <dispositivos-list></dispositivos-list>
 </section>

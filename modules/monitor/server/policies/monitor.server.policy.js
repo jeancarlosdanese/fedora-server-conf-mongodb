@@ -15,19 +15,19 @@ exports.invokeRolesPolicies = function () {
   acl.allow([{
     roles: ['admin'],
     allows: [{
-      resources: '/api/ambientes',
-      permissions: '*'
+      resources: '/api/monitor',
+      permissions: 'get'
     }, {
-      resources: '/api/ambientes/:ambienteId',
+      resources: '/api/monitor/memory',
       permissions: '*'
     }]
   }, {
     roles: ['user'],
     allows: [{
-      resources: '/api/ambientes',
-      permissions: ['get', 'post']
+      resources: '/api/monitor',
+      permissions: ['get']
     }, {
-      resources: '/api/ambientes/:ambienteId',
+      resources: '/api/monitor/memory',
       permissions: ['get']
     }]
   }]);
@@ -40,7 +40,7 @@ exports.isAllowed = function (req, res, next) {
   var roles = (req.user) ? req.user.roles : ['guest'];
 
   // If an Ambiente is being processed and the current user created it then allow any manipulation
-  if (req.ambiente && req.user && req.ambiente.user && req.ambiente.user.id === req.user.id) {
+  if (req.monitor && req.user && req.monitor.user && req.monitor.user.id === req.user.id) {
     return next();
   }
 
