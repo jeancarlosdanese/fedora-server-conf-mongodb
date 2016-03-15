@@ -1,4 +1,5 @@
 (function () {
+
   'use strict';
 
   angular
@@ -26,10 +27,10 @@
     function atualizaMem() {
       $http.get('/api/monitor/memory')
       .then(function(memResumo) {
-        vm.memTotal.push({ 'x': index, 'y': memResumo.data[0] / (1024 * 1024) });
-        vm.memUsada.push({ 'x': index, 'y': (memResumo.data[0] - memResumo.data[1]) / (1024 * 1024) });
-        vm.memLivre.push({ 'x': index, 'y': memResumo.data[1] / (1024 * 1024) });
-        if(vm.memTotal.length >= 10) {
+        vm.memTotal.push({ 'x': index, 'y': memResumo.data[0].memTotal });
+        vm.memUsada.push({ 'x': index, 'y': memResumo.data[1].memUsada });
+        vm.memLivre.push({ 'x': index, 'y': memResumo.data[2].memLivre });
+        if(vm.memTotal.length > 10) {
           vm.memTotal.splice(0, 1);
           vm.memUsada.splice(0, 1);
           vm.memLivre.splice(0, 1);
@@ -82,7 +83,7 @@
         y: function (d) {
           return d.y;
         },
-        yDomain: [0, 17000],
+        yDomain: [0, 17],
         xAxis: {
           tickFormat: function (d) {
             return d + ' s';
@@ -91,7 +92,7 @@
         },
         yAxis: {
           tickFormat: function (d) {
-            return d + ' MB';
+            return d + ' GB';
           }
         },
         interactiveLayer: {
