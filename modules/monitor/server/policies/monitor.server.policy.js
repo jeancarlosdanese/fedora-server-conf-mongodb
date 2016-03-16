@@ -18,7 +18,7 @@ exports.invokeRolesPolicies = function () {
       resources: '/api/monitor',
       permissions: 'get'
     }, {
-      resources: '/api/monitor/memory',
+      resources: '/api/monitor/memoria',
       permissions: '*'
     }]
   }, {
@@ -27,7 +27,7 @@ exports.invokeRolesPolicies = function () {
       resources: '/api/monitor',
       permissions: ['get']
     }, {
-      resources: '/api/monitor/memory',
+      resources: '/api/monitor/memoria',
       permissions: ['get']
     }]
   }]);

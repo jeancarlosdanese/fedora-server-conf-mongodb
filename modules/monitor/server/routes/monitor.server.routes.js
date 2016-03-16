@@ -8,7 +8,7 @@ var monitorPolicy = require('../policies/monitor.server.policy'),
 
 module.exports = function(app) {
   // Monitor Routes
-  app.route('/api/monitor/memory').all(monitorPolicy.isAllowed)
-    .get(monitor.memory);
+  app.route('/api/monitor/memoria').all(monitorPolicy.isAllowed)
+    .get(monitor.memoria);
 
 };
