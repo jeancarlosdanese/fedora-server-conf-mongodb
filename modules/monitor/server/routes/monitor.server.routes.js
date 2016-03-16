@@ -11,7 +11,4 @@ module.exports = function(app) {
   app.route('/api/monitor/memory').all(monitorPolicy.isAllowed)
     .get(monitor.memory);
 
-  app.route('/api/monitor/limpa-memoria').all(monitorPolicy.isAllowed)
-    .get(monitor.limpaMemoria);
-
 };

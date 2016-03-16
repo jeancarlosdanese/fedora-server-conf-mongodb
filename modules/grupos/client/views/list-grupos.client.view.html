@@ -1,0 +1,26 @@
+<section>
+  <div class="page-header">
+    <h1>Grupos</h1>
+    <div>
+      <a ng-show="vm.authentication.user.isAdmin" data-ui-sref="grupos.create" data-ng-if="vm.grupos.$resolved && vm.grupos.length">
+        <i class="fa fa-laptop"> Criar grupo</i>
+      </a>
+    </div>
+  </div>
+  <div class="list-group">
+    <div class="col-xs-12 col-sm-6 col-md-3 " data-ng-repeat="grupo in vm.grupos |  orderBy: 'nome'">
+      <a ui-sref="grupos.view({ grupoId: grupo._id })" class="list-group-item" style="padding-bottom: 0; margin-bottom: 10px;">  
+        <div class="text-center">
+          <i class="fa fa-folder-o fa-5x text-primary"></i>
+        </div>
+        <h4 class="text-center">{{grupo.nome}}</h4> 
+        <div class="row panel-footer" style="background-color: #337AB7;">
+            <h5 style="color:#fff">{{grupo.descricao}}</h5>
+        </div>
+      </a>
+    </div>
+  </div>
+  <div class="alert alert-warning text-center" data-ng-if="vm.grupos.$resolved && !vm.grupos.length">
+    Sem grupos cadastrados. <a data-ui-sref="grupos.create"> Criar grupo</a>
+  </div>
+</section>

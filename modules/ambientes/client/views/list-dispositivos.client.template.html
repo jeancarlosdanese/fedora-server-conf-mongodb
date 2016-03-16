@@ -1,27 +1,43 @@
 <div class="list-group">
-  <div class="col-xs-6 col-sm-4 extra-space" data-ng-repeat="dispositivo in vm.ambiente.dispositivos">
-    <a ng-click="vm.modalEditDispositivo('md', dispositivo)" class="list-group-item">
-      <h4 class="cust-list text-center">
-        <i class="fa fa-desktop" ng-class="{'text-primary': vm.ambiente}"></i>
-      </h4>
-      <div class="row">
-        <div class="col-xs-10 col-xs-offset-1">
-          <h4>{{dispositivo.nome}}</h4>
-          <h5>{{dispositivo.ip}}</h5>
-          <small class="list-group-item-text text-muted">
-            <span data-ng-bind="dispositivo.mac"></span>
+  <h5 ng-show="vm.ambiente.dispositivos.length">Dispositivos do ambiente : <span class="label label-default">{{vm.ambiente.nome}}</span></h5>
 
-            <span class="pull-right">
-              <button class="btn btn-default btn-sm" ng-click="vm.removeDispositivo(dispositivo)">
-                <i class="glyphicon glyphicon-trash"></i>
-              </button>
-            </span>
-          </small>
+<!--exibido para o admin-->
+  <div ng-show="vm.authentication.user.isAdmin" class="col-xs-12 col-sm-6 col-md-3 " data-ng-repeat="dispositivo in vm.ambiente.dispositivos |  orderBy: 'nome'">
+    <a ng-click="vm.modalEditDispositivo('md', dispositivo)" class="list-group-item" style="padding-bottom: 0; margin-bottom: 10px;">  
+      <div class="text-center">
+        <i class="fa fa-desktop fa-5x text-primary"></i>
+      </div>
+      <h4 class="text-center">{{dispositivo.nome}}</h4> 
+      <div class="row panel-footer" style="background-color: #337ad7;">
+        <div class="col-xs-9 col-md-9">
+          <h5 style="color:#fff">{{dispositivo.ip}}</h5>
+          <h5 style="color:#fff">{{dispositivo.mac}}</h5>
+        </div>
+        <div class="col-xs-3 col-md-3">
+          <button class="btn" style="margin-top: 12px" ng-click="vm.removeDispositivo(dispositivo)">
+            <i class="fa fa-trash text-primary" ng-click="vm.removeDispositivo(dispositivo)"></i>
+          </button>
         </div>
       </div>
     </a>
   </div>
 </div>
-<div class="alert alert-warning text-center" data-ng-if="vm.ambiente.dispositivos.$resolved && !vm.ambiente.dispositivos.length">
-  No Customers yet, why don't you <a data-ui-sref="ambiente.dispositivos.create">create one</a>?
+<!--exibido para o user-->
+<div ng-show="!vm.authentication.user.isAdmin" class="col-xs-12 col-sm-6 col-md-3 " data-ng-repeat="dispositivo in vm.ambiente.dispositivos |  orderBy: 'nome'">
+    <a class="list-group-item" style="padding-bottom: 0; margin-bottom: 10px;">  
+      <div class="text-center">
+        <i class="fa fa-desktop fa-5x text-primary"></i>
+      </div>
+      <h4 class="text-center">{{dispositivo.nome}}</h4> 
+      <div class="row panel-footer" style="background-color: #337ad7;">
+        <div class="col-xs-9 col-md-9">
+          <h5 style="color:#fff">{{dispositivo.ip}}</h5>
+          <h5 style="color:#fff">{{dispositivo.mac}}</h5>
+        </div>
+      </div>
+    </a>
+  </div>
+</div>
+<div class="alert alert-warning text-center" data-ng-if="vm.ambiente.$resolved &&!vm.ambiente.dispositivos.length">
+   Sem dispositivos cadastrados neste ambiente.
 </div>

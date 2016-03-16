@@ -1,0 +1,56 @@
+<section ng-controller="PrincipalController">
+
+	<!-- <div class="col-md-6">
+		<div class="lert alert-warning">
+			<a class="btn btn-primary" data-toggle="collapse" href="#add" aria-expanded="false" aria-controls="add">
+				<i class="fa fa-plus"></i>
+			</a>
+		</div>
+		<br></br>
+		<div class="collapse" id="add">
+		  <div class="well col-md-6">
+		    <button type="button" class="btn btn-default text-center " data-ui-sref="ambiente.create" data-toggle="tooltip" data-placement="bottom" title="Criar ambiente">
+		    	<i class="fa fa-laptop fa-3x"></i>
+		    </button>
+
+		    <button type="button" class="btn btn-default text-center" data-ui-sref="dispositivo.create" data-toggle="tooltip" data-placement="bottom" title="Criar dispositivo">
+		    	<i class="fa fa-desktop fa-3x"></i>
+		    </button>
+
+		    <button type="button" class="btn btn-default text-center" data-ui-sref="site.create" data-toggle="tooltip" data-placement="bottom" title="Proibir site">
+		    	<i class="fa fa-ban fa-3x"></i>
+		    </button>
+	  	</div>
+		</div>
+	</div>
+
+	<div class="col-md-6">
+		<a class="btn btn-primary btn-block" data-toggle="collapse" href="#list" aria-expanded="false" aria-controls="list">
+			<i class="fa fa-th-list"></i>
+		</a>
+		<br></br>
+		<div class="collapse" id="list">
+		  <div class="well col-md-6">
+		    <button type="button" class="btn btn-default text-center" data-ui-sref="ambientes.list" data-toggle="tooltip" data-placement="bottom" title="Criar ambiente">
+		    	<i class="fa fa-laptop fa-3x"></i>
+		    </button>
+
+		    <button type="button" class="btn btn-default text-center" data-ui-sref="dispositivos.list" data-toggle="tooltip" data-placement="bottom" title="Criar dispositivo">
+		    	<i class="fa fa-desktop fa-3x"></i>
+		    </button>
+
+		    <button type="button" class="btn btn-default text-center" data-ui-sref="sites.list" data-toggle="tooltip" data-placement="bottom" title="Proibir site">
+		    	<i class="fa fa-ban fa-3x"></i>
+		    </button>
+		  </div>
+		</div>
+	</div> -->
+
+  <!--AMBIENTES-->
+  <div ng-include="'modules/principal/client/views/list-ambientes.client.view.html'"></div>
+
+  <div class="col-md-12">
+    <div ng-include="'modules/monitor/client/views/system-monitor.client.view.html'"></div>
+  </div>
+
+</section>

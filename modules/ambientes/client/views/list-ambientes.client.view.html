@@ -1,22 +1,35 @@
 <section>
   <div class="page-header">
-    <h1>Ambientes</h1>
+    <h1 class="text-center">Ambientes</h1> 
+
+    <div ng-show="vm.authentication.user.isAdmin">
+        <a data-ui-sref="ambientes.create" data-ng-if="vm.ambientes.$resolved && vm.ambientes.length">
+         <i class="fa fa-laptop"> Criar Ambiente</i>
+        </a>
+    </div>
   </div>
+
   <div class="list-group">
-    <a data-ng-repeat="ambiente in vm.ambientes"
-       data-ui-sref="ambientes.view({ ambienteId: ambiente._id })"
-       class="list-group-item">
-      <small class="list-group-item-text">
-        Posted on
-        <span data-ng-bind="ambiente.created | date:'mediumDate'"></span>
-        by
-        <span data-ng-if="ambiente.user" data-ng-bind="ambiente.user.displayName"></span>
-        <span data-ng-if="!ambiente.user">Deleted User</span>
-      </small>
-      <h4 class="list-group-item-heading" data-ng-bind="ambiente.nome"></h4>
-    </a>
+    <div class="col-xs-12 col-sm-6 col-md-3 " data-ng-repeat="ambiente in vm.ambientes |  orderBy: 'nome'">
+      <a ui-sref="ambientes.edit({ ambienteId: ambiente._id })" class="list-group-item" style="padding-bottom: 0; margin-bottom: 10px;">  
+        <div class="text-center">
+          <i class="fa fa-desktop fa-5x text-primary"></i>
+        </div>
+        <h4 class="text-center">{{ambiente.nome}}</h4> 
+        <div class="row panel-footer" style="background-color: #337ad7;">
+          <div class="col-xs-9 col-md-9">
+            <h5 style="color:#fff">{{ambiente.descricao}}</h5>
+          </div>
+          <div class="col-xs-3 col-md-3">
+            <button class="btn" ng-click="">
+              <i class="fa fa-unlock-alt text-primary" ></i>
+            </button>
+          </div>
+        </div>
+      </a>
+    </div>
   </div>
   <div class="alert alert-warning text-center" data-ng-if="vm.ambientes.$resolved && !vm.ambientes.length">
-    No Ambientes yet, why don't you <a data-ui-sref="ambientes.create">create one</a>?
+    Sem ambientes cadastrados. <a data-ui-sref="ambientes.create">Criar ambiente</a>?
   </div>
 </section>

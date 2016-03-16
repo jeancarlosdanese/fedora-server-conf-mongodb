@@ -46,8 +46,12 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
         // If successful we assign the response to the global user model
         $scope.authentication.user = response;
 
+        //indica se o usuario logado é admin
+        $scope.authentication.user.isAdmin = response.roles.indexOf('admin') !== -1;
+        
         // And redirect to the previous or home page
-        $state.go($state.previous.state.name || 'home', $state.previous.params);
+       //$state.go($state.previous.state.name || 'home', $state.previous.params);
+        $state.go('principal.view');
       }).error(function (response) {
         $scope.error = response.message;
       });

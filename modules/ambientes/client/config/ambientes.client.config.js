@@ -1,4 +1,4 @@
-(function () {
+/*(function () {
   'use strict';
 
   angular
@@ -13,7 +13,7 @@
       title: 'Ambientes',
       state: 'ambientes',
       type: 'dropdown',
-      roles: ['*']
+      roles: ['admin', 'user']
     });
 
     // Add the dropdown list item
@@ -26,7 +26,8 @@
     Menus.addSubMenuItem('topbar', 'ambientes', {
       title: 'Create Ambiente',
       state: 'ambientes.create',
-      roles: ['user']
+      roles: ['admin']
     });
   }
 })();
+*/

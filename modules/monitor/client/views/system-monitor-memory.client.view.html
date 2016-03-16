@@ -1,0 +1,24 @@
+<section ng-controller="MonitorController as vm">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4>Memória</h4>
+    </div>
+    <div>
+     <!--  <canvas id="line" class="chart chart-line" chart-data="data"
+        chart-labels="labels" chart-legend="true" chart-series="series"
+        chart-click="onClick">
+      </canvas> -->
+      <!-- {{vm.memTotal}}
+      {{vm.memUsada}}
+      {{vm.memLivre}} -->
+    </div>
+
+    <div>
+      <nvd3 options="vm.options"
+        data="vm.data"
+        config="vm.config"
+        events="events"
+        api="api"></nvd3>
+    </div>
+    </div>
+</section>

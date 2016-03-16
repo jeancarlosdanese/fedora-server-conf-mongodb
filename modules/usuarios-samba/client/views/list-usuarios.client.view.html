@@ -1,0 +1,33 @@
+<section>
+  <div class="page-header">
+    <h1>Usuários</h1>
+    <div>
+      <a ng-show="vm.authentication.user.isAdmin" data-ui-sref="usuarios.create" data-ng-if="vm.usuarios.$resolved && vm.usuarios.length">
+        <i class="fa fa-laptop"> Criar usuário</i>
+      </a>
+    </div>
+  </div>
+  <div class="list-group">
+    <div class="col-xs-12 col-sm-6 col-md-3 " data-ng-repeat="usuario in vm.usuarios |  orderBy: 'nome'">
+      <a ui-sref="usuarios.edit({ usuarioId: usuario._id })" class="list-group-item" style="padding-bottom: 0; margin-bottom: 10px;">  
+        <div class="text-center">
+          <i class="fa fa-user fa-5x text-primary"></i>
+        </div>
+        <h4 class="text-center">{{usuario.nome}}</h4> 
+        <div class="row panel-footer" style="background-color: #337AB7;">
+          <div class="col-xs-9 col-md-9">
+            <h5 style="color:#fff">Criação - Cetesc - Público - Suporte</h5>
+          </div>
+          <div ng-show="vm.authentication.user.isAdmin" class="col-xs-3 col-md-3">
+            <button class="btn" style="margin-top: 12px" ng-click="vm.removeUsuario(usuario)">
+            <i class="fa fa-trash text-primary"  ng-click="vm.removeUsuario(usuario)"></i>
+          </button>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+  <div class="alert alert-warning text-center" data-ng-if="vm.usuarios.$resolved && !vm.usuarios.length">
+    Sem usuários cadastrados. <a ng-show="vm.authentication.user.isAdmin" data-ui-sref="usuarios.create"> Criar usuário</a>
+  </div>
+</section>

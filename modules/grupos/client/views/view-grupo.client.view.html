@@ -1,0 +1,31 @@
+<section>
+  <div class="page-header">
+    <h1 >Grupo {{vm.grupo.nome}}</h1>
+  </div>
+  <div class="row">
+    <div class="col pull-right"
+         data-ng-show="vm.grupo.isCurrentUserOwner">
+      <a class="btn btn-primary"
+         data-ui-sref="grupos.edit({ grupoId: vm.grupo._id })">
+        <i class="glyphicon glyphicon-edit"></i>
+      </a>
+      <a class="btn btn-primary" data-ng-click="vm.remove()">
+        <i class="glyphicon glyphicon-trash"></i>
+      </a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4" >
+      <div class="jumbotron text-center">
+        <i class="fa fa-folder-open-o fa-5x large text-primary"></i>
+      </div>
+    </div>
+    <div class="col-md-8">
+        <p><strong>Nome:</strong> {{vm.grupo.nome}}</p>
+        <p><strong>Descrição:</strong> {{vm.grupo.descricao}} </p>
+        <p><strong>Permissão grupo:</strong> </p>
+        <p><strong>Permissão diretorio:</strong> </p>
+        <p><strong>Permissão arquivos:</strong> </p>
+    </div>
+  </div>
+</section>

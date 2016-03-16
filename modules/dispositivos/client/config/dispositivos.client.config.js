@@ -1,4 +1,4 @@
-(function () {
+/*(function () {
   'use strict';
 
   angular
@@ -13,7 +13,7 @@
       title: 'Dispositivos',
       state: 'dispositivos',
       type: 'dropdown',
-      roles: ['*']
+      roles: ['admin', 'user']
     });
 
     // Add the dropdown list item
@@ -26,7 +26,8 @@
     Menus.addSubMenuItem('topbar', 'dispositivos', {
       title: 'Create Dispositivo',
       state: 'dispositivos.create',
-      roles: ['user']
+      roles: ['admin']
     });
   }
 })();
+*/

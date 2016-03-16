@@ -1,32 +1,38 @@
-<section>
-  <div class="page-header">
+<section> 
+  <div class="page-header"> 
     <h1>{{vm.ambiente._id ? 'Editar ambiente' : 'Novo ambiente'}}</h1>
   </div>
+
   <div class="row">
     <div class="col-md-8">
       <form name="vm.form.ambienteForm" class="form-horizontal" ng-submit="vm.save(vm.form.ambienteForm.$valid)" novalidate>
         <fieldset>
           <div class="form-group" ng-class="{ 'has-error' : vm.form.ambienteForm.nome.$error.required && !vm.form.ambienteForm.nome.$pristine}">
             <label class="control-label" for="nome">Nome</label>
-            <input name="nome" type="text" ng-model="vm.ambiente.nome" id="nome" class="form-control" placeholder="Nome" required>
+            <input name="nome" type="text" ng-model="vm.ambiente.nome" id="nome" class="form-control" placeholder="Nome" ng-disabled="!vm.authentication.user.isAdmin" required>
             <div ng-show="vm.form.ambienteForm.nome.$error.required && !vm.form.ambienteForm.nome.$pristine" role="alert">
               <span class="text-danger">Nome do ambiente é obrigatório.</span>
             </div>
           </div>
           <div class="form-group">
             <label class="control-label" for="descricao">Descrição</label>
-            <textarea name="descricao" type="text" ng-model="vm.ambiente.descricao" id="descricao" class="form-control" placeholder="Descricao"></textarea>
+            <textarea name="descricao" type="text" ng-model="vm.ambiente.descricao" id="descricao" class="form-control" placeholder="Descricao" ng-disabled="!vm.authentication.user.isAdmin"></textarea> 
           </div>
-          <div class="form-group">
-            <button type="submit" class="btn btn-primary">{{vm.ambiente._id ? 'Update' : 'Salvar'}}</button>
-            <button type="button" ng-show="vm.ambiente._id" class="btn btn-success text-center" ng-click="vm.modalCreateDispositivo('md', vm.ambiente)">Novo dispositivo
+          <div class="form-group" >
+            <button data-ng-show="vm.authentication.user.isAdmin" type="submit" class="btn btn-primary" ng-disabled="vm.form.ambienteForm.nome.$invalid">{{vm.ambiente._id ? 'Atualizar' : 'Salvar'}}</button>
+            <button type="button" ng-show="vm.ambiente._id && vm.authentication.user.isAdmin" class="btn btn-primary text-center" ng-click="vm.modalCreateDispositivo('md', vm.ambiente)">Novo dispositivo
             </button>
+            <button type="button" class="btn btn-primary text-center" data-ui-sref="ambientes.list">Cancelar/Voltar
+            </button>
+            <a class="btn btn-primary" ng-show="vm.ambiente._id && vm.authentication.user.isAdmin" data-ng-click="vm.remove()">
+              <i class="glyphicon glyphicon-trash"> Excluir</i>
+            </a>
           </div>
           <div ng-show="vm.error" class="text-danger">
             <strong ng-bind="vm.error"></strong>
           </div>
         </fieldset>
-      </form>
+      </form>  
     </div>
     <div class="hidden-xs hidden-sm col-md-4" >
       <div class="jumbotron text-center">

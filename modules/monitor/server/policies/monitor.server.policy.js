@@ -20,9 +20,6 @@ exports.invokeRolesPolicies = function () {
     }, {
       resources: '/api/monitor/memory',
       permissions: '*'
-    }, {
-      resources: '/api/monitor/limpa-memoria',
-      permissions: '*'
     }]
   }, {
     roles: ['user'],

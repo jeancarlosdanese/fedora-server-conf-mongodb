@@ -1,9 +1,8 @@
 <section>
   <div class="page-header">
-    <h1 data-ng-bind="vm.dispositivo.name"></h1>
+    <h1 >Dispositivo {{vm.dispositivo.nome}}</h1>
   </div>
-  <div class="pull-right"
-       data-ng-show="vm.dispositivo.isCurrentUserOwner">
+  <div class="pull-right" data-ng-show="vm.dispositivo.isCurrentUserOwner">
     <a class="btn btn-primary"
        data-ui-sref="dispositivos.edit({ dispositivoId: vm.dispositivo._id })">
       <i class="glyphicon glyphicon-edit"></i>
@@ -12,15 +11,16 @@
       <i class="glyphicon glyphicon-trash"></i>
     </a>
   </div>
-  <small>
-    <em class="text-muted">
-      Posted on
-      <span data-ng-bind="vm.dispositivo.created | date:'mediumDate'"></span>
-      by
-      <span data-ng-if="vm.dispositivo.user"
-            data-ng-bind="vm.dispositivo.user.displayName"></span>
-      <span data-ng-if="!vm.dispositivo.user">Deleted User</span>
-    </em>
-  </small>
+  <div class="row col-md-12">
+    <div class="hidden-xs hidden-sm col-md-2" >
+    <div class="jumbotron text-center">
+      <i class="fa fa-desktop fa-3x large text-success"></i>
+    </div>
+  </div>
+
+  <div>
+    <h4>Mac address: {{vm.dispositivo.mac}}</h4>
+    <h4>Endereço IP: {{vm.dispositivo.ip}}</h4>
+  </div>
   <p class="lead" data-ng-bind="vm.dispositivo.content"></p>
 </section>

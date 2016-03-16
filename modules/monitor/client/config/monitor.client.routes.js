@@ -18,6 +18,15 @@
           roles: ['user', 'admin'],
           pageTitle : 'Monitoramento do Sistema'
         }
+      })
+      .state('monitor.view', {
+        url: '',
+        templateUrl: 'modules/monitor/client/views/system-monitor.client.view.html',
+        controller: 'MonitorViewController',
+        controllerAs: 'vm',
+        data: {
+          pageTitle: 'Monitoramento do Sistema'
+        }
       });
   }
 
