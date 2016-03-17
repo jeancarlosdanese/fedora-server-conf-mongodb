@@ -9,15 +9,33 @@ var path = require('path'),
   cp = require('child_process'),
   _ = require('lodash');
 
-var memTotalGB = sprintf('%.2f', os.totalmem() / (1024 * 1024 * 1024));
+var memTotalGB = (os.totalmem() / (1024 * 1024 * 1024)).toFixed(2);
 
 exports.memoria = function(req, res) {
 
-  var memLivreGB = sprintf('%.2f', os.freemem() / (1024 * 1024 * 1024));
-  var memUsadaGB = sprintf('%.2f', memTotalGB - memLivreGB);
+  var memLivreGB = (os.freemem() / (1024 * 1024 * 1024)).toFixed(2);
+  var memUsadaGB = (memTotalGB - memLivreGB).toFixed(2);
   var memResumo = [{ 'memTotal': memTotalGB }, { 'memUsada': memUsadaGB }, { 'memLivre': memLivreGB }];
 
   res.jsonp(memResumo);
+
+};
+
+exports.cpus = function(req, res) {
+
+  var cpus = os.cpus();
+  var percUsoCpu = [];
+  var cpuNum = 0;
+
+  for (var i = 0; i < cpus.length; i++) {
+    var cpu = cpus[i].times;
+    var usoCpu = { 'cpuNum': 'CPU-' + (i + 1), 'usoCpu': (((cpu.user + cpu.nice + cpu.sys) / (cpu.user + cpu.nice + cpu.sys + cpu.idle)) * 100).toFixed(2) };
+    percUsoCpu.push(usoCpu);
+  }
+
+  console.log(percUsoCpu);
+
+  res.jsonp(percUsoCpu);
 
 };
 

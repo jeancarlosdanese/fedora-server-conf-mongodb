@@ -11,4 +11,7 @@ module.exports = function(app) {
   app.route('/api/monitor/memoria').all(monitorPolicy.isAllowed)
     .get(monitor.memoria);
 
+  app.route('/api/monitor/cpus').all(monitorPolicy.isAllowed)
+    .get(monitor.cpus);
+
 };

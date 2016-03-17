@@ -1,13 +1,13 @@
-<section ng-controller="MonitorController">
+<section ng-controller="MonitorCpusController as vm">
   <div class="panel panel-default">
   	<div class="panel-heading">
-	    <h4>Processador</h4>
+	    <h4>Processadores ( CPUs )</h4>
 	  </div>
 	  <div>
-	    <nvd3 options="options1"
-	      data="data1">
+	    <nvd3 options="vm.options"
+	      data="vm.data">
 	    </nvd3>
 	  </div>
   </div>
-   
+
 </section>

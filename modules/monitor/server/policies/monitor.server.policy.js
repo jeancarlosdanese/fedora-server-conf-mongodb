@@ -20,6 +20,9 @@ exports.invokeRolesPolicies = function () {
     }, {
       resources: '/api/monitor/memoria',
       permissions: '*'
+    }, {
+      resources: '/api/monitor/cpus',
+      permissions: '*'
     }]
   }, {
     roles: ['user'],
@@ -29,6 +32,9 @@ exports.invokeRolesPolicies = function () {
     }, {
       resources: '/api/monitor/memoria',
       permissions: ['get']
+    }, {
+      resources: '/api/monitor/cpus',
+      permissions: '*'
     }]
   }]);
 };
