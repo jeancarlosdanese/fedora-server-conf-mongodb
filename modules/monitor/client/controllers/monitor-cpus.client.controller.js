@@ -25,7 +25,7 @@
         dadosCpus.data.forEach(function(dado) {
           var i = dadosCpus.data.indexOf(dado);
           // vm.series[i].values.push([ index, dado.usoCpu ]);
-          vm.series[i].values.push( { 'x': index, 'y': dado.usoCpu } );
+          vm.series[i].values.push({ 'x': index, 'y': dado.usoCpu });
 
         });
 
@@ -49,7 +49,7 @@
       .then(function(dadosCpus) {
         // console.log(dadosCpus);
         dadosCpus.data.forEach(function(dados) {
-          vm.series.push( { 'key': dados.cpuNum, 'values': [] } );
+          vm.series.push({ 'key': dados.cpuNum, 'values': [] });
         });
       }, function(err) {
         console.log(err);
