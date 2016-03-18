@@ -3,7 +3,7 @@
     <h1>Sites proibidos</h1>
     <div>
       <a data-ui-sref="sites.create" data-ng-if="vm.sites.$resolved && vm.sites.length">
-        <i class="fa fa-laptop"> Incluir site proibido</i>
+        <i class="fa fa-ban"> Incluir site proibido</i>
       </a>
     </div>
   </div>
@@ -12,10 +12,10 @@
       <button class="btn pull-right">
         <i class="fa fa-trash text-primary" ng-click="vm.removeSite(site)"></i>
       </button>
-      <h4>{{site.nome}}</h4> 
+      <h4>{{site.nome}}</h4>
     </a>
   </div>
   <div class="alert alert-warning text-center" data-ng-if="vm.sites.$resolved && !vm.sites.length">
-    Sem sites proibidos cadastrados. <a data-ui-sref="sites.create"> Criar site proibido</a>
+    Nenhum site proibido cadastrados. <a data-ui-sref="sites.create"> incluir site proibido</a>
   </div>
 </section>

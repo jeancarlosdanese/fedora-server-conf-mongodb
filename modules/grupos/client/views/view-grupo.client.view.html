@@ -3,24 +3,19 @@
     <h1 >Grupo {{vm.grupo.nome}}</h1>
   </div>
   <div class="row">
-    <div class="col pull-right"
-         data-ng-show="vm.grupo.isCurrentUserOwner">
-      <a class="btn btn-primary"
-         data-ui-sref="grupos.edit({ grupoId: vm.grupo._id })">
-        <i class="glyphicon glyphicon-edit"></i>
-      </a>
-      <a class="btn btn-primary" data-ng-click="vm.remove()">
-        <i class="glyphicon glyphicon-trash"></i>
-      </a>
+    <div class="col pull-right" data-ng-show="vm.grupo.isCurrentUserOwner">
+      <a class="btn btn-primary" data-ui-sref="grupos.list()"><i class="fa fa-arrow-circle-left"></i></a>
+      <a class="btn btn-primary" data-ui-sref="grupos.edit({ grupoId: vm.grupo._id })"><i class="fa fa-edit"></i></a>
+      <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".modal-excluir"><i class="fa fa-trash"></i></button>
     </div>
   </div>
   <div class="row">
-    <div class="col-md-4" >
+    <div class="col-sm-3 col-md-3" >
       <div class="jumbotron text-center">
         <i class="fa fa-folder-open-o fa-5x large text-primary"></i>
       </div>
     </div>
-    <div class="col-md-8">
+    <div class="col-sm-9 col-md-9">
         <p><strong>Nome:</strong> {{vm.grupo.nome}}</p>
         <p><strong>Descrição:</strong> {{vm.grupo.descricao}} </p>
         <p><strong>Permissão grupo:</strong> </p>
@@ -29,3 +24,21 @@
     </div>
   </div>
 </section>
+
+<!-- Small modal -->
+<div class="modal fade modal-excluir" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>{{vm.grupo.nome}}</h4>
+      </div>
+      <div class="modal-body">
+        <h5>Tem certeza de que deseja excluir o grupo {{vm.grupo.nome}}?</h5>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar/Voltar</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" data-ng-click="vm.remove()">Excluir</button>
+      </div>
+    </div>
+  </div>
+</div>

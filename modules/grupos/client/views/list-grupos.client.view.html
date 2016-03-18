@@ -3,24 +3,31 @@
     <h1>Grupos</h1>
     <div>
       <a ng-show="vm.authentication.user.isAdmin" data-ui-sref="grupos.create" data-ng-if="vm.grupos.$resolved && vm.grupos.length">
-        <i class="fa fa-laptop"> Criar grupo</i>
+        <i class="fa fa-folder-o"> Incluir grupo</i>
       </a>
     </div>
   </div>
-  <div class="list-group">
-    <div class="col-xs-12 col-sm-6 col-md-3 " data-ng-repeat="grupo in vm.grupos |  orderBy: 'nome'">
-      <a ui-sref="grupos.view({ grupoId: grupo._id })" class="list-group-item" style="padding-bottom: 0; margin-bottom: 10px;">  
-        <div class="text-center">
-          <i class="fa fa-folder-o fa-5x text-primary"></i>
+  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" data-ng-repeat="grupo in vm.grupos | orderBy: 'nome'">
+    <a class="link-painel" ui-sref="grupos.view({ grupoId: grupo._id })">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <div class="row">
+            <div class="col-xs-3">
+                <i class="fa fa-folder-o fa-5x"></i>
+            </div>
+            <div class="col-xs-9 text-right">
+                <div>{{grupo.descricao}}</div>
+            </div>
+          </div>
         </div>
-        <h4 class="text-center">{{grupo.nome}}</h4> 
-        <div class="row panel-footer" style="background-color: #337AB7;">
-            <h5 style="color:#fff">{{grupo.descricao}}</h5>
+        <div class="panel-footer">
+            <span class="pull-left">{{grupo.nome}}</span>
+            <div class="clearfix"></div>
         </div>
-      </a>
-    </div>
+      </div>
+    </a>
   </div>
   <div class="alert alert-warning text-center" data-ng-if="vm.grupos.$resolved && !vm.grupos.length">
-    Sem grupos cadastrados. <a data-ui-sref="grupos.create"> Criar grupo</a>
+    Nenhum grupo cadastrado. <a data-ui-sref="grupos.create"> Incluir grupo</a>
   </div>
 </section>

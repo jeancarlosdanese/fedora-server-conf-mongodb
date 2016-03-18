@@ -1,18 +1,38 @@
 <section>
   <div class="page-header">
     <h1>Dispositivos</h1>
+    <div>
+      <a data-ui-sref="dispositivos.create" data-ng-if="vm.dispositivos.$resolved && vm.dispositivos.length">
+        <i class="fa fa-desktop"> Incluir dispositivo</i>
+      </a>
+    </div>
   </div>
-  <div class="list-group">
-    <a data-ng-repeat="dispositivo in vm.dispositivos"
-       data-ui-sref="dispositivos.view({ dispositivoId: dispositivo._id })"
-       class="list-group-item">
-      <small class="list-group-item-text">
-       Dispositivo
-      </small>
-      <h4 class="list-group-item-heading" data-ng-bind="dispositivo.nome"></h4>
+  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" data-ng-repeat="dispositivo in vm.dispositivos | orderBy: 'nome'">
+    <a class="link-painel" ui-sref="dispositivos.edit({ dispositivoId: dispositivo._id })">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <div class="row">
+            <div class="col-xs-3">
+                <i class="fa fa-desktop fa-5x"></i>
+            </div>
+            <div class="col-xs-9 text-right">
+                <div>{{dispositivo.ip}}</div>
+                <div>{{dispositivo.mac}}</div>
+            </div>
+          </div>
+        </div>
+        <div class="panel-footer">
+          <span class="pull-left">{{dispositivo.nome}}</span>
+          <span class="pull-right"><i class="fa fa-trash text-danger"></i></span>
+          <div class="clearfix"></div>
+          <!-- <button class="btn" style="margin-top: 12px" ng-click="vm.removeDispositivo(dispositivo)">
+            <i class="fa fa-trash text-primary" ng-click="vm.removeDispositivo(dispositivo)"></i>
+          </button> -->
+        </div>
+      </div>
     </a>
   </div>
   <div class="alert alert-warning text-center" data-ng-if="vm.dispositivos.$resolved && !vm.dispositivos.length">
-    Não existem dispositivos cadastrados. <a data-ui-sref="dispositivos.create"> Criar dispositivo</a>
+    Nenhum dispositivo cadastrado. <a data-ui-sref="dispositivos.create"> Incluir dispositivo</a>
   </div>
 </section>

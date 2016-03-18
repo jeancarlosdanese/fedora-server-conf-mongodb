@@ -1,8 +1,7 @@
-<section> 
-  <div class="page-header"> 
+<section>
+  <div class="page-header">
     <h1>{{vm.ambiente._id ? 'Editar ambiente' : 'Novo ambiente'}}</h1>
   </div>
-
   <div class="row">
     <div class="col-md-8">
       <form name="vm.form.ambienteForm" class="form-horizontal" ng-submit="vm.save(vm.form.ambienteForm.$valid)" novalidate>
@@ -16,7 +15,7 @@
           </div>
           <div class="form-group">
             <label class="control-label" for="descricao">Descrição</label>
-            <textarea name="descricao" type="text" ng-model="vm.ambiente.descricao" id="descricao" class="form-control" placeholder="Descricao" ng-disabled="!vm.authentication.user.isAdmin"></textarea> 
+            <textarea name="descricao" type="text" ng-model="vm.ambiente.descricao" id="descricao" class="form-control" placeholder="Descricao" ng-disabled="!vm.authentication.user.isAdmin"></textarea>
           </div>
           <div class="form-group" >
             <button data-ng-show="vm.authentication.user.isAdmin" type="submit" class="btn btn-primary" ng-disabled="vm.form.ambienteForm.nome.$invalid">{{vm.ambiente._id ? 'Atualizar' : 'Salvar'}}</button>
@@ -24,21 +23,37 @@
             </button>
             <button type="button" class="btn btn-primary text-center" data-ui-sref="ambientes.list">Cancelar/Voltar
             </button>
-            <a class="btn btn-primary" ng-show="vm.ambiente._id && vm.authentication.user.isAdmin" data-ng-click="vm.remove()">
-              <i class="glyphicon glyphicon-trash"> Excluir</i>
-            </a>
+            <a class="btn btn-primary" ng-show="vm.ambiente._id && vm.authentication.user.isAdmin" data-toggle="modal" data-target=".modal-excluir">Excluir</a>
           </div>
           <div ng-show="vm.error" class="text-danger">
             <strong ng-bind="vm.error"></strong>
           </div>
         </fieldset>
-      </form>  
+      </form>
     </div>
-    <div class="hidden-xs hidden-sm col-md-4" >
-      <div class="jumbotron text-center">
+    <div class="panel col-md-4">
+      <div class="hidden-xs hidden-sm jumbotron text-center">
         <i class="fa fa-desktop fa-5x large text-primary"></i>
       </div>
     </div>
   </div>
   <dispositivos-list></dispositivos-list>
 </section>
+
+<!-- Small modal -->
+<div class="modal fade modal-excluir" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>{{vm.ambiente.nome}}</h4>
+      </div>
+      <div class="modal-body">
+        <h5>Tem certeza de que deseja excluir o ambiente {{vm.ambiente.nome}}?</h5>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar/Voltar</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" data-ng-click="vm.remove()">Excluir</button>
+      </div>
+    </div>
+  </div>
+</div>
