@@ -6,6 +6,9 @@ angular.module('core').controller('HeaderController', ['$scope', '$state', 'Auth
     $scope.$state = $state;
     $scope.authentication = Authentication;
 
+    //indica se o usuario logado é admin
+    $scope.authentication.user.isAdmin = $scope.authentication.user.roles.indexOf('admin') !== -1;
+
     // Get the topbar menu
     $scope.menu = Menus.getMenu('topbar');
 
