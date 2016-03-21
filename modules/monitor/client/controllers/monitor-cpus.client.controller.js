@@ -5,44 +5,13 @@
     .module('monitor')
     .controller('MonitorCpusController', MonitorCpusController);
 
-  MonitorCpusController.$inject = ['$http', '$interval'];
+  MonitorCpusController.$inject = ['$http', '$interval', '$scope', '$state', 'Authentication', 'Socket'];
 
-  function MonitorCpusController($http, $interval) {
+  function MonitorCpusController($http, $interval, $scope, $state, Authentication, Socket) {
     var vm = this;
-
-    var index = 0;
-    var intervaloSegundos = 1;
-
     vm.series = [];
 
     atualizaSeries();
-    atualizaCpus();
-    $interval(atualizaCpus, (1000 * intervaloSegundos));
-
-    function atualizaCpus() {
-      $http.get('/api/monitor/cpus')
-      .then(function(dadosCpus) {
-        dadosCpus.data.forEach(function(dado) {
-          var i = dadosCpus.data.indexOf(dado);
-          // vm.series[i].values.push([ index, dado.usoCpu ]);
-          vm.series[i].values.push({ 'x': index, 'y': dado.usoCpu });
-
-        });
-
-        /*vm.series.forEach(function(serie) {
-          vm.data.push({
-            key: serie.cpu,
-            values: serie.valores
-          });
-        });*/
-
-        console.log(vm.series);
-
-        index += intervaloSegundos;
-      }, function(err) {
-        console.log(err);
-      });
-    }
 
     function atualizaSeries() {
       $http.get('/api/monitor/cpus')
@@ -55,6 +24,74 @@
         console.log(err);
       });
     }
+
+    init();
+
+    function init() {
+
+      // If user is not signed in then redirect back home
+      if (!Authentication.user) {
+        $state.go('home');
+      }
+
+      // Make sure the Socket is connected
+      if (!Socket.socket) {
+        Socket.connect();
+      }
+
+      // Add an event listener to the 'chatMessage' event
+      Socket.on('cpu_usage', function(usoCpus){
+        // console.log(usoCpus);
+        for(var i in usoCpus) {
+          var uso = usoCpus[i];
+          vm.series[i].values.push({ 'x': uso.index, 'y': uso.percentagem });
+        }
+      });
+
+      // Remove the event listener when the controller instance is destroyed
+      $scope.$on('$destroy', function () {
+        Socket.emit('stop_monitor_cpu', function() {
+          console.log('barbaridade tche');
+        });
+        console.log('destroy socket cpus');
+        Socket.removeListener('cpu_usage');
+      });
+    }
+
+    /*var index = 0;
+    var intervaloSegundos = 60;
+
+    atualizaSeries();
+    atualizaCpus();
+    $interval(atualizaCpus, (1000 * intervaloSegundos));*/
+
+    /*function atualizaCpus() {
+      $http.get('/api/monitor/cpus')
+      .then(function(dadosCpus) {
+        dadosCpus.data.forEach(function(dado) {
+          var i = dadosCpus.data.indexOf(dado);
+          // vm.series[i].values.push([ index, dado.usoCpu ]);
+          vm.series[i].values.push({ 'x': index, 'y': dado.usoCpu });
+
+        });
+
+        index += intervaloSegundos;
+      }, function(err) {
+        console.log(err);
+      });
+    }*/
+
+    /*function atualizaSeries() {
+      $http.get('/api/monitor/cpus')
+      .then(function(dadosCpus) {
+        // console.log(dadosCpus);
+        dadosCpus.data.forEach(function(dados) {
+          vm.series.push({ 'key': dados.cpuNum, 'values': [] });
+        });
+      }, function(err) {
+        console.log(err);
+      });
+    }*/
 
     // vm.data = vm.series;
 
@@ -127,7 +164,7 @@
           bottom: 32,
           left: 78
         },
-        duration: 10,
+        duration: 3,
         clipEdge: true,
         isArea: false,
         useInteractiveGuideline: true,
