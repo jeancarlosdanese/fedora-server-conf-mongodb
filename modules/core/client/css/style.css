@@ -1,6 +1,16 @@
-.link-painel{
-  background-color: #337AB7;
-}
 .text-white{
-  color: #fff;
+  color:#fff;
+}
+.bg-primary{
+  background-color:#042240;
+}
+
+/*==============*/
+/*   ambiente   */
+/*==============*/
+.margin-ambiente{
+  margin:10px;
+}
+.btn-ambiente{
+  border-radius: 0px 0px 0px 10px;
 }

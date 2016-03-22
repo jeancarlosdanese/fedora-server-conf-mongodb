@@ -3,7 +3,7 @@
   <!--exibido para o admin-->
   <!-- ng-show="vm.authentication.user.isAdmin" -->
   <div  class="col-xs-12 col-sm-6 col-md-4 col-lg-3" data-ng-repeat="dispositivo in vm.ambiente.dispositivos |  orderBy: 'nome'">
-    <div class="link-painel panel panel-primary">
+    <div class="bg-primary panel panel-primary">
       <a ng-click="vm.modalEditDispositivo('md', dispositivo)">
         <div class="panel-heading">
           <div class="row">
@@ -44,7 +44,7 @@
   </div>
   <!--exibido para o user-->
   <div ng-show="!vm.authentication.user.isAdmin"  class="col-xs-12 col-sm-6 col-md-4 col-lg-3" data-ng-repeat="dispositivo in vm.ambiente.dispositivos |  orderBy: 'nome'">
-    <a class="link-painel">
+    <a class="bg-primary">
       <div class="panel panel-primary">
         <div class="panel-heading">
           <div class="row">
