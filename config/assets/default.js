@@ -4,7 +4,7 @@ module.exports = {
   client: {
     lib: {
       css: [
-        'public/lib/bootstrap/dist/css/bootstrap-fedora.min.css',
+        'public/css/bootstrap-fedora.css',
         'public/lib/font-awesome/css/font-awesome.css',
         'public/lib/angular-chart.js/dist/angular-chart.css',
         'public/lib/nvd3/build/nv.d3.css'
