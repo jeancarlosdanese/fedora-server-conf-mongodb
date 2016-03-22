@@ -33,7 +33,7 @@ exports.cpus = function(req, res) {
     percUsoCpu.push(usoCpu);
   }
 
-  console.log(percUsoCpu);
+  // console.log(percUsoCpu);
 
   res.jsonp(percUsoCpu);
 
