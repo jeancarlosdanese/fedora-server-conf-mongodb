@@ -48,7 +48,7 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
 
         //indica se o usuario logado é admin
         $scope.authentication.user.isAdmin = response.roles.indexOf('admin') !== -1;
-        
+
         // And redirect to the previous or home page
        //$state.go($state.previous.state.name || 'home', $state.previous.params);
         $state.go('principal.view');

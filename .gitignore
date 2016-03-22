@@ -72,3 +72,6 @@ mongod
 *.ntvs*
 *.njsproj
 *.sln
+
+# App Ignore
+linuxconf/

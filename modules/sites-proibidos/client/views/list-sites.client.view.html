@@ -2,14 +2,14 @@
   <div class="page-header">
     <h1>Sites proibidos</h1>
     <div>
-      <a data-ui-sref="sites.create" data-ng-if="vm.sites.$resolved && vm.sites.length">
+      <a ng-show= "vm.authentication.user.isAdmin" data-ui-sref="sites.create" data-ng-if="vm.sites.$resolved && vm.sites.length">
         <i class="fa fa-ban"> Incluir site proibido</i>
       </a>
     </div>
   </div>
   <div class="list-group">
     <a ng-repeat="site in vm.sites" ui-sref="sites.edit({ siteId: site._id })" class="list-group-item">
-      <button class="btn pull-right">
+      <button class="btn pull-right" ng-show= "vm.authentication.user.isAdmin">
         <i class="fa fa-trash text-primary" ng-click="vm.removeSite(site)"></i>
       </button>
       <h4>{{site.nome}}</h4>

@@ -71,7 +71,7 @@
     Menus.addSubMenuItem('topbar', 'cadastro', {
       title: 'Proibir site',
       state: 'sites.create',
-      roles: ['admin', 'user']
+      roles: ['admin']
     });
 
     //uusuario samba

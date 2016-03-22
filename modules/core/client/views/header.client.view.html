@@ -7,11 +7,11 @@
       <span class="icon-bar"></span>
     </button>
 
-   <div ng-hide="authentication.user">
+   <div ng-hide="authentication.user.isAdmin">
       <a ui-sref="home" class="navbar-brand"><i class="fa fa-server"></i> FEDORA</a>
    </div>
 
-   <div ng-show="authentication.user">
+   <div ng-show="authentication.user.isAdmin">
       <a ui-sref="principal.view" class="navbar-brand"><i class="fa fa-server"></i> FEDORA</a>
    </div>
 
