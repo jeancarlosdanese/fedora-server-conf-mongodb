@@ -1,38 +1,55 @@
 <section>
   <div class="page-header">
-    <h1>Dispositivos</h1>
-    <div>
-      <a data-ui-sref="dispositivos.create" data-ng-if="vm.dispositivos.$resolved && vm.dispositivos.length">
-        <i class="fa fa-desktop"> Incluir dispositivo</i>
-      </a>
-    </div>
+    <h1 class="text-center">Dispositivos</h1>
   </div>
+  <div class="container-fluid">
+    <a data-ui-sref="dispositivos.create" class="btn btn-primary" data-ng-if="vm.dispositivos.$resolved && vm.dispositivos.length">
+      <i class="fa fa-plus"> Incluir dispositivo</i>
+    </a>
+  </div>
+  <br>
+  <!--Início painel-->
   <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" data-ng-repeat="dispositivo in vm.dispositivos | orderBy: 'nome'">
-    <a class="link-painel" ui-sref="dispositivos.edit({ dispositivoId: dispositivo._id })">
-      <div class="panel panel-primary">
-        <div class="panel-heading">
-          <div class="row">
-            <div class="col-xs-3">
-                <i class="fa fa-desktop fa-5x"></i>
+    <div class="panel panel-primary">
+      <div class="panel-body" >
+        <div class="row">
+          <div class="col-xs-5">
+            <img alt="ambiente icone" class="img-responsive" src="modules/dispositivos/client/img/dispositivo.png"/>
+          </div>
+          <div class="col-xs-7 text-left">
+            <h5> {{dispositivo.ip}}</h5>
+            <h5> {{dispositivo.mac}}</h5>
+          </div>
+        </div>
+      </div>
+      <div class="panel-footer bg-primary">
+        <a class="icon-link pull-left text-capitalize" ui-sref="dispositivos.edit({ dispositivoId: dispositivo._id })">{{dispositivo.nome}}</a>
+        <span class="pull-right" data-toggle="tooltip" title="Excluir"><i class="fa fa-trash text-danger" data-toggle="modal" data-target=".modal-excluir-dispositivo"></i></span>
+        <a class="icon-link pull-right" ui-sref="dispositivos.edit({ dispositivoId: dispositivo._id })" data-toggle="tooltip" title="Editar"><i class="fa fa-edit"></i></a>
+        <div class="clearfix"></div>
+      </div>
+      <!-- Small modal -->
+      <div class="modal fade modal-excluir-dispositivo" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-md">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4>{{dispositivo.nome}}</h4>
             </div>
-            <div class="col-xs-9 text-right">
-                <div>{{dispositivo.ip}}</div>
-                <div>{{dispositivo.mac}}</div>
+            <div class="modal-body">
+              <h5>Tem certeza de que deseja excluir o dispostivo <strong>{{dispositivo.nome}}</strong>?</h5>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Cancelar/Voltar</button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="vm.removeDispositivo(dispositivo)"><i class="fa fa-trash"></i> Excluir</button>
             </div>
           </div>
         </div>
-        <div class="panel-footer">
-          <span class="pull-left">{{dispositivo.nome}}</span>
-          <span class="pull-right"><i class="fa fa-trash text-danger"></i></span>
-          <div class="clearfix"></div>
-          <!-- <button class="btn" style="margin-top: 12px" ng-click="vm.removeDispositivo(dispositivo)">
-            <i class="fa fa-trash text-primary" ng-click="vm.removeDispositivo(dispositivo)"></i>
-          </button> -->
-        </div>
       </div>
-    </a>
+      <!--Fim Small modal -->
+    </div>
   </div>
+  <!--Fim painel-->
   <div class="alert alert-warning text-center" data-ng-if="vm.dispositivos.$resolved && !vm.dispositivos.length">
-    Nenhum dispositivo cadastrado. <a data-ui-sref="dispositivos.create"> Incluir dispositivo</a>
+    Nenhum dispositivo cadastrado. <a class="alert-link" data-ui-sref="dispositivos.create"> Incluir dispositivo</a>
   </div>
 </section>

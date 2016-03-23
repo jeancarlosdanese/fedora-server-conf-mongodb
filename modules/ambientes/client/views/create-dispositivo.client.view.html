@@ -43,8 +43,8 @@
           </div>
 
           <div class="form-group">
-            <button type="submit"  ng-disabled="vmCreate.form.dispositivoForm.$invalid" class="btn btn-primary">{{vmCreate.dispositivo._id ? 'Atualizar' : 'Salvar'}}</button>
-            <button class="btn btn-primary" type="button" ng-click="vmModal.cancel()">Cancelar</button>
+            <button type="submit"  ng-disabled="vmCreate.form.dispositivoForm.$invalid" class="btn btn-primary"><i class="fa fa-check"></i> {{vmCreate.dispositivo._id ? 'Atualizar' : 'Salvar'}}</button>
+            <button class="btn btn-primary" type="button" ng-click="vmModal.cancel()"><i class="fa fa-times"></i> Cancelar</button>
           </div>
 
         </fieldset>

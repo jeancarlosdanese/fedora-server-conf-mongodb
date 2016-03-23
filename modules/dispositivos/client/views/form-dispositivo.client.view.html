@@ -1,6 +1,6 @@
 <section>
   <div class="page-header">
-    <h1>{{vm.dispositivo._id ? 'Editar dispositivo' : 'Novo dispositivo'}}</h1>
+    <h1 class="text-center">{{vm.dispositivo._id ? 'Editar dispositivo' : 'Novo dispositivo'}}</h1>
   </div>
   <div class="row">
     <form name="vm.form.dispositivoForm" class="form-horizontal" ng-submit="vm.save(vm.form.dispositivoForm.$valid)" novalidate>
@@ -36,8 +36,8 @@
         </div>
 
         <div class="form-group">
-          <button type="submit" class="btn btn-primary" ng-disabled="vm.form.dispositivoForm.$invalid">{{vm.dispositivo._id ? 'Atualizar' : 'Salvar'}}</button>
-          <button type="button" class="btn btn-primary" data-ui-sref="dispositivos.list">Cancelar/Voltar</button>
+          <button type="submit" class="btn btn-primary" ng-disabled="vm.form.dispositivoForm.$invalid"><i class="fa fa-check"></i>  {{vm.dispositivo._id ? 'Atualizar' : 'Salvar'}}</button>
+          <button type="button" class="btn btn-primary" data-ui-sref="dispositivos.list"><i class="fa fa-times"></i> Cancelar/Voltar</button>
         </div>
         <div ng-show="vm.error" class="text-danger">
           <strong ng-bind="vm.error"></strong>
