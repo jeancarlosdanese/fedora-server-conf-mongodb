@@ -4,7 +4,7 @@
   </div>
   <div class="row">
     <div class="col pull-right" data-ng-show="vm.grupo.isCurrentUserOwner">
-      <a class="btn btn-primary" data-ui-sref="grupos.list()"><i class="fa fa-arrow-circle-left"></i></a>
+      <a class="btn btn-primary" data-ui-sref="grupos.list()"><i class="fa fa-times"></i></a>
       <a class="btn btn-primary" data-ui-sref="grupos.edit({ grupoId: vm.grupo._id })"><i class="fa fa-edit"></i></a>
       <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".modal-excluir"><i class="fa fa-trash"></i></button>
     </div>
@@ -12,7 +12,7 @@
   <div class="row">
     <div class="col-sm-3 col-md-3" >
       <div class="jumbotron text-center">
-        <i class="fa fa-folder-open-o fa-5x large text-primary"></i>
+        <img alt="ambiente icone" class="img-responsive" src="modules/grupos/client/img/grupo.png"/>
       </div>
     </div>
     <div class="col-sm-9 col-md-9">
@@ -33,7 +33,7 @@
         <h4>{{vm.grupo.nome}}</h4>
       </div>
       <div class="modal-body">
-        <h5>Tem certeza de que deseja excluir o grupo {{vm.grupo.nome}}?</h5>
+        <h5>Tem certeza de que deseja excluir o grupo <strong>{{vm.grupo.nome}}</strong>?</h5>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar/Voltar</button>

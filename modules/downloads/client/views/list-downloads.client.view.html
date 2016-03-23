@@ -1,50 +1,52 @@
-<section>
+<section class="container">
   <div class="page-header">
     <h1 class="text-center">Restrições de downloads</h1>
   </div>
-  <div class="container-fluid">
+  <div>
     <a data-ui-sref="downloads.create" class="btn btn-primary" data-ng-if="vm.downloads.$resolved && vm.downloads.length">
-      <i class="fa fa-plus"> Incluir download restrito</i>
+      <i class="fa fa-plus"></i> Incluir download restrito
     </a>
   </div>
   <br>
   <!--Início painel-->
-  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" data-ng-repeat="download in vm.downloads | orderBy: 'nome'">
-    <div class="panel panel-primary">
-      <div class="panel-body">
-        <div class="row">
-          <div class="col-xs-5">
-            <img alt="ambiente icone" class="img-responsive" src="modules/downloads/client/img/download.png"/>
-          </div>
-          <div class="col-xs-7 text-left">
-            <h5>{{download.descricao}}</h5>
-          </div>
-        </div>
-      </div>
-      <div class="panel-footer bg-primary">
-        <a class="icon-link pull-left" ui-sref="downloads.edit({ downloadId: download._id })">{{download.extensao}}</a>
-        <span class="pull-right icon-link-hand" data-toggle="tooltip" title="Excluir"><i class="fa fa-trash text-danger" data-toggle="modal" data-target=".modal-excluir"></i></span>
-        <a class="icon-link pull-right" ui-sref="downloads.edit({ downloadId: download._id })" data-toggle="tooltip" title="Editar"><i class="fa fa-edit"></i></a>
-        <div class="clearfix"></div>
-      </div>
-      <!-- Small modal -->
-      <div class="modal fade modal-excluir" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-md">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h4>{{download.extensao}}</h4>
+  <div class="row">
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" data-ng-repeat="download in vm.downloads | orderBy: 'nome'">
+      <div class="panel panel-primary">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-xs-5">
+              <img alt="ambiente icone" class="img-responsive" src="modules/downloads/client/img/download.png"/>
             </div>
-            <div class="modal-body">
-              <h5>Tem certeza de que deseja excluir o download restrito <strong>{{download.extensao}}</strong>?</h5>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Cancelar/Voltar</button>
-              <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="vm.removeDownload(download)"><i class="fa fa-trash"></i> Excluir</button>
+            <div class="col-xs-7 text-left">
+              <h5>{{download.descricao}}</h5>
             </div>
           </div>
         </div>
+        <div class="panel-footer bg-primary">
+          <a class="icon-link pull-left" ui-sref="downloads.edit({ downloadId: download._id })">{{download.extensao}}</a>
+          <span class="pull-right icon-link-hand" data-toggle="tooltip" title="Excluir"><i class="fa fa-trash text-danger" data-toggle="modal" data-target=".modal-excluir"></i></span>
+          <a class="icon-link pull-right" ui-sref="downloads.edit({ downloadId: download._id })" data-toggle="tooltip" title="Editar"><i class="fa fa-edit"></i></a>
+          <div class="clearfix"></div>
+        </div>
+        <!-- Small modal -->
+        <div class="modal fade modal-excluir" tabindex="-1" role="dialog">
+          <div class="modal-dialog modal-md">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4>{{download.extensao}}</h4>
+              </div>
+              <div class="modal-body">
+                <h5>Tem certeza de que deseja excluir o download restrito <strong>{{download.extensao}}</strong>?</h5>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Cancelar/Voltar</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="vm.removeDownload(download)"><i class="fa fa-trash"></i> Excluir</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--Fim Small modal -->
       </div>
-      <!--Fim Small modal -->
     </div>
   </div>
   <!--Fim painel-->
