@@ -53,7 +53,9 @@ exports.isAllowed = function (req, res, next) {
       if (isAllowed) {
         // Access granted! Invoke next middleware
         return next();
-      } else {
+      } else if(!req.user || !req.ambiente.user){ //JOEL: testa se nao possui usuario logado retorna erro 401
+        return res.status(401).send('Not user logged');
+      }else {
         return res.status(403).json({
           message: 'User is not authorized'
         });

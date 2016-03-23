@@ -14,7 +14,7 @@
       title: 'Cadastrar',
       state: 'cadastro',
       type: 'dropdown',
-      roles: ['admin', 'user']
+      roles: ['admin']
     });
 
     //TOP BAR SUBMENU ITEM
