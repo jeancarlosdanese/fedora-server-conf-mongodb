@@ -25,24 +25,13 @@ exports.invokeRolesPolicies = function () {
     roles: ['user'],
     allows: [{
       resources: '/api/sites',
-      permissions: ['get', 'post']
+      permissions: ['get']
     }, {
       resources: '/api/sites/:siteId',
       permissions: ['get']
     }]
   }]);
 };
-
-// , {
-//   roles: ['guest'],
-//   allows: [{
-//     resources: '/api/sites',
-//     permissions: ['get']
-//   }, {
-//     resources: '/api/sites/:siteId',
-//     permissions: ['get']
-//   }]
-// }
 
 /**
  * Check If Sites Policy Allows

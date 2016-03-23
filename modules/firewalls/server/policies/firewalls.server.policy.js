@@ -25,24 +25,13 @@ exports.invokeRolesPolicies = function () {
     roles: ['user'],
     allows: [{
       resources: '/api/firewalls',
-      permissions: ['get', 'post']
+      permissions: ['get']
     }, {
       resources: '/api/firewalls/:firewallId',
       permissions: ['get']
     }]
   }]);
 };
-
-// , {
-//   roles: ['guest'],
-//   allows: [{
-//     resources: '/api/firewalls',
-//     permissions: ['get']
-//   }, {
-//     resources: '/api/firewalls/:firewallId',
-//     permissions: ['get']
-//   }]
-// }
 
 /**
  * Check If Firewalls Policy Allows

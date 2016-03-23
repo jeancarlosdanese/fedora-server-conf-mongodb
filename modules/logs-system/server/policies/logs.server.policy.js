@@ -25,24 +25,13 @@ exports.invokeRolesPolicies = function () {
     roles: ['user'],
     allows: [{
       resources: '/api/logs',
-      permissions: ['get', 'post']
+      permissions: ['get']
     }, {
       resources: '/api/logs/:logId',
       permissions: ['get']
     }]
   }]);
 };
-
-// , {
-//   roles: ['guest'],
-//   allows: [{
-//     resources: '/api/logs',
-//     permissions: ['get']
-//   }, {
-//     resources: '/api/logs/:logId',
-//     permissions: ['get']
-//   }]
-// }
 
 /**
  * Check If Logs Policy Allows

@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('core').controller('HeaderController', ['$scope', '$state', 'Authentication', 'Menus',
-  function ($scope, $state, Authentication, Menus) {
+angular.module('core').controller('HeaderController', ['$scope', '$state', 'Authentication', 'Menus', '$location',
+  function ($scope, $state, Authentication, Menus, $location) {
     // Expose view variables
     $scope.$state = $state;
     $scope.authentication = Authentication;
@@ -11,6 +11,13 @@ angular.module('core').controller('HeaderController', ['$scope', '$state', 'Auth
       $scope.authentication.user.isAdmin = $scope.authentication.user.roles.indexOf('admin') !== -1;
     }
 
+    /*JOEL: testa se tem usuario, se tem vai para home ou outra url desejada pelo usuario
+    se nao tem usuario logado direciona para a tela de login*/
+    if ($scope.authentication.user) {
+
+    }else {
+      $location.path('/authentication/signin');
+    }
     // Get the topbar menu
     $scope.menu = Menus.getMenu('topbar');
 

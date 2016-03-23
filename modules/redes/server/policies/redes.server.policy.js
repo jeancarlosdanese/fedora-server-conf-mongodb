@@ -25,24 +25,13 @@ exports.invokeRolesPolicies = function () {
     roles: ['user'],
     allows: [{
       resources: '/api/redes',
-      permissions: ['get', 'post']
+      permissions: ['get']
     }, {
       resources: '/api/redes/:redeId',
       permissions: ['get']
     }]
   }]);
 };
-
-// , {
-//   roles: ['guest'],
-//   allows: [{
-//     resources: '/api/redes',
-//     permissions: ['get']
-//   }, {
-//     resources: '/api/redes/:redeId',
-//     permissions: ['get']
-//   }]
-// }
 
 /**
  * Check If Redes Policy Allows

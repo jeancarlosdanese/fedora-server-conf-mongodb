@@ -25,24 +25,13 @@ exports.invokeRolesPolicies = function () {
     roles: ['user'],
     allows: [{
       resources: '/api/usuarios',
-      permissions: ['get', 'post']
+      permissions: ['get']
     }, {
       resources: '/api/usuarios/:usuarioId',
       permissions: ['get']
     }]
   }]);
 };
-
-// , {
-//   roles: ['guest'],
-//   allows: [{
-//     resources: '/api/usuarios',
-//     permissions: ['get']
-//   }, {
-//     resources: '/api/usuarios/:usuarioId',
-//     permissions: ['get']
-//   }]
-// }
 
 /**
  * Check If Usuarios Policy Allows

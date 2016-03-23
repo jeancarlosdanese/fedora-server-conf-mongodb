@@ -25,7 +25,7 @@ exports.invokeRolesPolicies = function () {
     roles: ['user'],
     allows: [{
       resources: '/api/ambientes',
-      permissions: ['get', 'post']
+      permissions: ['get']
     }, {
       resources: '/api/ambientes/:ambienteId',
       permissions: ['get']

@@ -25,7 +25,7 @@ exports.invokeRolesPolicies = function () {
     roles: ['user'],
     allows: [{
       resources: '/api/downloads',
-      permissions: ['get', 'post']
+      permissions: ['get']
     }, {
       resources: '/api/downloads/:downloadId',
       permissions: ['get']
@@ -33,16 +33,6 @@ exports.invokeRolesPolicies = function () {
   }]);
 };
 
-// , {
-//   roles: ['guest'],
-//   allows: [{
-//     resources: '/api/downloads',
-//     permissions: ['get']
-//   }, {
-//     resources: '/api/downloads/:downloadId',
-//     permissions: ['get']
-//   }]
-// }
 
 /**
  * Check If Downloads Policy Allows

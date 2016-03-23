@@ -25,7 +25,7 @@ exports.invokeRolesPolicies = function () {
     roles: ['user'],
     allows: [{
       resources: '/api/grupos',
-      permissions: ['get', 'post']
+      permissions: ['get']
     }, {
       resources: '/api/grupos/:grupoId',
       permissions: ['get']
@@ -33,16 +33,6 @@ exports.invokeRolesPolicies = function () {
   }]);
 };
 
-// , {
-//   roles: ['guest'],
-//   allows: [{
-//     resources: '/api/grupos',
-//     permissions: ['get']
-//   }, {
-//     resources: '/api/grupos/:grupoId',
-//     permissions: ['get']
-//   }]
-// }
 
 /**
  * Check If Grupos Policy Allows

@@ -7,8 +7,13 @@
       <span class="icon-bar"></span>
     </button>
 
-   <div>
+  <!-- EXIBE QUANDO TEM USUARIO LOGADO-->
+   <div ng-show="authentication.user">
       <a ui-sref="home" class="navbar-brand"><i class="fa fa-server"></i> FEDORA</a>
+   </div>
+  <!-- EXIBE QUANDO NÃO TEM USUARIO LOGADO-->
+   <div ng-hide="authentication.user">
+      <a class="navbar-brand"><i class="fa fa-server"></i> FEDORA</a>
    </div>
 
   </div>
