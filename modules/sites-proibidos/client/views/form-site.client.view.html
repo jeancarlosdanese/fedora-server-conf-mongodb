@@ -16,7 +16,7 @@
 
           <div class="form-group">
             <button ng-show= "vm.authentication.user.isAdmin" type="submit" class="btn btn-primary" ng-disabled="vm.form.siteForm.$invalid"><i class="fa fa-check"></i> {{vm.site._id ? 'Atualizar' : 'Criar'}}</button>
-            <button type="button" class="btn btn-primary" data-ui-sref="sites.list"><i class="fa fa-times"></i> Cancelar/Voltar</button>
+            <button type="button" class="btn btn-default" data-ui-sref="sites.list"><i class="fa fa-times"></i> Cancelar/Voltar</button>
           </div>
           <div ng-show="vm.error" class="text-danger"><strong ng-bind="vm.error"></strong></div>
         </fieldset>
