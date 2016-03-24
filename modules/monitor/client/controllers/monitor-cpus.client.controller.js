@@ -5,25 +5,14 @@
     .module('monitor')
     .controller('MonitorCpusController', MonitorCpusController);
 
-  MonitorCpusController.$inject = ['$http', '$interval', '$scope', '$state', 'Authentication', 'Socket'];
+  MonitorCpusController.$inject = ['$http', '$interval', '$scope', '$state', 'Authentication', 'Socket', '$window'];
 
-  function MonitorCpusController($http, $interval, $scope, $state, Authentication, Socket) {
+  function MonitorCpusController($http, $interval, $scope, $state, Authentication, Socket, $window) {
     var vm = this;
+    var d3 = $window.d3;
+
     vm.series = [];
-
-    atualizaSeries();
-
-    function atualizaSeries() {
-      $http.get('/api/monitor/cpus')
-      .then(function(dadosCpus) {
-        // console.log(dadosCpus);
-        dadosCpus.data.forEach(function(dados) {
-          vm.series.push({ 'key': dados.cpuNum, 'values': [] });
-        });
-      }, function(err) {
-        console.log(err);
-      });
-    }
+    vm.data1 = [{ key: 'Uso dos processadores', values: [] }];
 
     init();
 
@@ -39,122 +28,44 @@
         Socket.connect();
       }
 
+      Socket.emit('start_monitor_cpu');
+      var intervaloTempoCpu = $interval(function () {
+        Socket.emit('start_monitor_cpu');
+      }, 10000);
+
       // Add an event listener to the 'chatMessage' event
-      Socket.on('cpu_usage', function(usoCpus){
-        // console.log(usoCpus);
-        for(var i in usoCpus) {
-          var uso = usoCpus[i];
+      Socket.on('utilizacao_cpus', function(utilizacaoCpus){
+        for(var i in utilizacaoCpus) {
+          var uso = utilizacaoCpus[i];
+          if(vm.series && vm.series[i] && vm.series[i].values && vm.series[i].values.length > 5) {
+            vm.series[i].values.shift();
+          } else if(vm.series && vm.series[i] === undefined) {
+            vm.series.push({ 'key': 'CPU-' + i, 'values': [] });
+          }
           vm.series[i].values.push({ 'x': uso.index, 'y': uso.percentagem });
+          if(vm.data1[0].values[i]) {
+            vm.data1[0].values.splice(i, 1, { 'label': 'CPU-' + i, 'value': uso.percentagem });
+          } else {
+            vm.data1[0].values.push({ 'label': 'CPU-' + i, 'value': uso.percentagem });
+          }
         }
       });
 
       // Remove the event listener when the controller instance is destroyed
       $scope.$on('$destroy', function () {
-        Socket.emit('stop_monitor_cpu', function() {
-          console.log('barbaridade tche');
-        });
-        console.log('destroy socket cpus');
-        Socket.removeListener('cpu_usage');
+        // console.log('destroy socket cpus');
+        Socket.emit('stop_monitor_cpu');
+        // $interval.cancel(intervaloTempoCpu);
+        Socket.removeListener('utilizacao_cpus');
       });
     }
 
-    /*var index = 0;
-    var intervaloSegundos = 60;
-
-    atualizaSeries();
-    atualizaCpus();
-    $interval(atualizaCpus, (1000 * intervaloSegundos));*/
-
-    /*function atualizaCpus() {
-      $http.get('/api/monitor/cpus')
-      .then(function(dadosCpus) {
-        dadosCpus.data.forEach(function(dado) {
-          var i = dadosCpus.data.indexOf(dado);
-          // vm.series[i].values.push([ index, dado.usoCpu ]);
-          vm.series[i].values.push({ 'x': index, 'y': dado.usoCpu });
-
-        });
-
-        index += intervaloSegundos;
-      }, function(err) {
-        console.log(err);
-      });
-    }*/
-
-    /*function atualizaSeries() {
-      $http.get('/api/monitor/cpus')
-      .then(function(dadosCpus) {
-        // console.log(dadosCpus);
-        dadosCpus.data.forEach(function(dados) {
-          vm.series.push({ 'key': dados.cpuNum, 'values': [] });
-        });
-      }, function(err) {
-        console.log(err);
-      });
-    }*/
-
-    // vm.data = vm.series;
-
-    /*vm.data = vm.series.forEach(function(serie) {
-      console.log(serie);
-      {
-        key: serie.cpu,
-        values: serie.valores
-      }
-    });*/
-
-    /*vm.data = [
-      {
-        key: 'CPU-1',
-        values: [ [ 1, 20 ], [ 2, 15 ], [ 3, 35 ], [ 4, 25 ] ]
-      },
-      {
-        key: 'CPU-2',
-        values: [ [ 1, 40 ], [ 2, 55 ], [ 3, 25 ], [ 4, 15 ] ]
-      }
-    ];
-
-    console.log(vm.data);*/
-
-    /*vm.options = {
-      chart: {
-        type: 'cumulativeLineChart',
-        height: 400,
-        margin : {
-          top: 20,
-          right: 20,
-          bottom: 60,
-          left: 65
-        },
-        x: function(d){ return d[0]; },
-        y: function(d){ return d[1]; },
-        average: function(d) { return d.mean; },
-
-        //color: d3.scale.category10().range(),
-        transitionDuration: 1,
-        useInteractiveGuideline: true,
-        clipVoronoi: false,
-
-        xAxis: {
-         // axisLabel: 'X Axis',
-          tickFormat: function(d) {
-              //return d3.time.format('%m/%d/%y')(new Date(d))
-          },
-          showMaxMin: false,
-          staggerLabels: true
-        },
-        yAxis: {
-         // axisLabel: 'Y Axis',
-          tickFormat: function(d){
-              //return d3.format(',.1%')(d);
-          },
-          axisLabelDistance: 20
-        }
-      }
-    };*/
-
     vm.options = {
       chart: {
+        config: {
+          refreshDataOnly: true,
+          deepWatchData: true
+        },
         type: 'lineChart',
         // color: ['rgba(0, 0, 0, 0.10)', 'rgba(255, 87, 34, 0.50)', 'rgba(63, 81, 181, 0.50)'],
         height: 300,
@@ -162,9 +73,10 @@
           top: 32,
           right: 32,
           bottom: 32,
-          left: 78
+          left: 48
         },
-        duration: 3,
+        noData: 'Capturando dados da CPU...',
+        duration: 250,
         clipEdge: true,
         isArea: false,
         useInteractiveGuideline: true,
@@ -179,13 +91,14 @@
         yDomain: [0, 100],
         xAxis: {
           tickFormat: function (d) {
-            return d + ' s';
+            // return d + ' s';
+            return d3.time.format('%H:%M %Ss')(new Date(d));
           },
           showMaxMin: false
         },
         yAxis: {
           tickFormat: function (d) {
-            return d + ' %';
+            return d3.format(',.2f')(d) + ' %';
           }
         },
         interactiveLayer: {
@@ -201,12 +114,47 @@
             bottom: 32,
             left: 0
           },
-          rightAlign: true
+          rightAlign: false
         }
       }
     };
 
     vm.data = vm.series;
+
+    vm.options1 = {
+      chart: {
+        config : {
+          refreshDataOnly: true,
+          deepWatchData  : true
+        },
+        type: 'discreteBarChart',
+        height: 300,
+        margin : {
+          top: 20,
+          right: 20,
+          bottom: 50,
+          left: 55
+        },
+        x: function(d) {
+          return d.label;
+        },
+        y: function(d) {
+          return d3.format(',.2f')(d.value);
+        },
+        showValues: true,
+        valueFormat: function(d){
+          return d3.format(',.2f')(d) + ' %';
+        },
+        duration: 500,
+        useInteractiveGuideline: true,
+        yDomain: [0, 100],
+        yAxis: {
+          tickFormat: function (d) {
+            return d + ' %';
+          }
+        }
+      }
+    };
 
   }
 
