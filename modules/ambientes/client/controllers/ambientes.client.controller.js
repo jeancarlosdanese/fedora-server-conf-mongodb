@@ -127,7 +127,7 @@
       });*/
     }
 
-    function removeDispositivo (dispositivo) {
+    /*function removeDispositivo (dispositivo) {
       if(dispositivo) {
         for(var i in vm.ambiente.dispositivos) {
           if(vm.ambiente.dispositivos[i] === dispositivo) {
@@ -136,6 +136,18 @@
               dispositivo.$remove();
               vm.ambiente.dispositivos.splice(i, 1);
             }
+          }
+        }
+      }
+    }*/
+    //JOEL: retirado a confirmação de remoção dodispositivo, visto que essa confirmação será feita no form com um modal
+    function removeDispositivo (dispositivo) {
+      if(dispositivo) {
+        for(var i in vm.ambiente.dispositivos) {
+          if(vm.ambiente.dispositivos[i] === dispositivo) {
+              dispositivo = new DispositivosService(vm.ambiente.dispositivos[i]);
+              dispositivo.$remove();
+              vm.ambiente.dispositivos.splice(i, 1);
           }
         }
       }

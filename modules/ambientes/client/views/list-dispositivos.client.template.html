@@ -16,14 +16,13 @@
       </div>
       <div class="panel-footer bg-primary">
         <a class="icon-link icon-link-hand pull-left text-capitalize" ng-click="vm.modalEditDispositivo('md', dispositivo)">{{dispositivo.nome}}</a>
-        <span class="pull-right icon-link-hand" data-toggle="tooltip" title="Excluir"><i class="fa fa-trash text-danger" data-toggle="modal" data-target=".modal-excluir-dispositivo"></i></span>
-        <!-- <span class="pull-right icon-link-hand" data-toggle="tooltip" title="Excluir"><i class="fa fa-trash text-danger" ng-click="vm.removeDispositivo(dispositivo)"></i></span> -->
+        <span class="pull-right icon-link-hand" data-toggle="tooltip" title="Excluir"><i class="fa fa-trash text-danger" data-toggle="modal" data-target=".modal{{dispositivo._id}}"></i></span>
         <a class="icon-link pull-right icon-link-hand" ng-click="vm.modalEditDispositivo('md', dispositivo)" data-toggle="tooltip" title="Editar"><i class="fa fa-edit"></i></a>
         <div class="clearfix"></div>
       </div>
     </div>
     <!-- Small modal -->
-    <div class="modal fade modal-excluir-dispositivo" tabindex="-1" role="dialog">
+    <div class="modal fade modal{{dispositivo._id}}" tabindex="-1" role="dialog">
       <div class="modal-dialog modal-md">
         <div class="modal-content">
           <div class="modal-header">
