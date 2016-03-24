@@ -15,15 +15,15 @@
     vm.dispositivo = dispositivo;
     vm.error = null;
     vm.form = {};
-    vm.remove = remove;
+    // vm.remove = remove;
     vm.save = save;
 
     // Remove existing Dispositivo
-    function remove() {
+    /*function remove() {
       if (confirm('Are you sure you want to delete?')) {
         vm.dispositivo.$remove($state.go('dispositivos.list'));
       }
-    }
+    }*/
 
     // Save Dispositivo
     function save(isValid) {
@@ -43,7 +43,7 @@
       }
 
       function successCallback(res) {
-        $state.go('dispositivos.view', {
+        $state.go('dispositivos.list', {
           dispositivoId: res._id
         });
       }

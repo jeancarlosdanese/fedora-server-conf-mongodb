@@ -145,9 +145,9 @@
       if(dispositivo) {
         for(var i in vm.ambiente.dispositivos) {
           if(vm.ambiente.dispositivos[i] === dispositivo) {
-              dispositivo = new DispositivosService(vm.ambiente.dispositivos[i]);
-              dispositivo.$remove();
-              vm.ambiente.dispositivos.splice(i, 1);
+            dispositivo = new DispositivosService(vm.ambiente.dispositivos[i]);
+            dispositivo.$remove();
+            vm.ambiente.dispositivos.splice(i, 1);
           }
         }
       }

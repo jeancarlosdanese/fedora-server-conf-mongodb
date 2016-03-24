@@ -3,7 +3,7 @@
     <h1 class="text-center">Dispositivos</h1>
   </div>
   <div>
-    <a data-ui-sref="dispositivos.create" class="btn btn-primary" data-ng-if="vm.dispositivos.$resolved && vm.dispositivos.length">
+    <a data-ui-sref="dispositivos.create" class="btn btn-primary" data-ng-if="vm.dispositivos.$resolved && vm.dispositivos.length" ng-show="vm.authentication.user.isAdmin">
       <i class="fa fa-plus"></i> Incluir dispositivo
     </a>
   </div>
@@ -25,12 +25,12 @@
         </div>
         <div class="panel-footer bg-primary">
           <a class="icon-link pull-left text-capitalize" ui-sref="dispositivos.edit({ dispositivoId: dispositivo._id })">{{dispositivo.nome}}</a>
-          <span class="pull-right" data-toggle="tooltip" title="Excluir"><i class="fa fa-trash text-danger" data-toggle="modal" data-target=".modal-excluir-dispositivo"></i></span>
-          <a class="icon-link pull-right" ui-sref="dispositivos.edit({ dispositivoId: dispositivo._id })" data-toggle="tooltip" title="Editar"><i class="fa fa-edit"></i></a>
+          <span ng-show="vm.authentication.user.isAdmin" class="pull-right" data-toggle="tooltip" title="Excluir"><i class="fa fa-trash text-danger" data-toggle="modal" data-target=".modal{{dispositivo._id}}"></i></span>
+          <a ng-show="vm.authentication.user.isAdmin" class="icon-link pull-right" ui-sref="dispositivos.edit({ dispositivoId: dispositivo._id })" data-toggle="tooltip" title="Editar"><i class="fa fa-edit"></i></a>
           <div class="clearfix"></div>
         </div>
         <!-- Small modal -->
-        <div class="modal fade modal-excluir-dispositivo" tabindex="-1" role="dialog">
+        <div class="modal fade modal{{dispositivo._id}}" tabindex="-1" role="dialog">
           <div class="modal-dialog modal-md">
             <div class="modal-content">
               <div class="modal-header">
@@ -41,7 +41,7 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Cancelar/Voltar</button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="vm.removeDispositivo(dispositivo)"><i class="fa fa-trash"></i> Excluir</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="vm.remove(dispositivo)"><i class="fa fa-trash"></i> Excluir</button>
               </div>
             </div>
           </div>
@@ -52,6 +52,6 @@
   </div>
   <!--Fim painel-->
   <div class="alert alert-warning text-center" data-ng-if="vm.dispositivos.$resolved && !vm.dispositivos.length">
-    Nenhum dispositivo cadastrado. <a class="alert-link" data-ui-sref="dispositivos.create"> Incluir dispositivo</a>
+    Nenhum dispositivo cadastrado. <a ng-show="vm.authentication.user.isAdmin" class="alert-link" data-ui-sref="dispositivos.create"> Incluir dispositivo</a>
   </div>
 </section>
