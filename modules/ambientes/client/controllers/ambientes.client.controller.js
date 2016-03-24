@@ -31,9 +31,7 @@
 
     // Remove existing Ambiente
     function remove() {
-      if (confirm('Are you sure you want to delete?')) {
-        vm.ambiente.$remove($state.go('ambientes.list'));
-      }
+      vm.ambiente.$remove($state.go('ambientes.list'));
     }
 
     // Save Ambiente
@@ -51,7 +49,7 @@
       }
 
       function successCallback(res) {
-        $state.go('ambientes.view', {
+        $state.go('ambientes.edit', {
           ambienteId: res._id
         });
       }
@@ -131,7 +129,6 @@
 
     function removeDispositivo (dispositivo) {
       if(dispositivo) {
-
         for(var i in vm.ambiente.dispositivos) {
           if(vm.ambiente.dispositivos[i] === dispositivo) {
             if (confirm('Sem certeza que deseja excluir o dispositivo' + dispositivo.nome + '?')) {

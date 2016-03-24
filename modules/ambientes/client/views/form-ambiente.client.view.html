@@ -1,6 +1,7 @@
 <section class="container">
   <div class="page-header">
-    <h1 class="text-center">{{vm.ambiente._id ? 'Editar ambiente' : 'Novo ambiente'}}</h1>
+    <h1 class="text-center" ng-show="vm.ambiente._id"> Ambiente {{vm.ambiente.nome | uppercase}}</h1>
+    <h1 class="text-center" ng-hide="vm.ambiente._id" >Novo ambiente</h1>
   </div>
   <div class="row">
     <div class="col-md-8">

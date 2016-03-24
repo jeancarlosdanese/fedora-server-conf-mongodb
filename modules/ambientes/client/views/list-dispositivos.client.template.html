@@ -17,28 +17,29 @@
       <div class="panel-footer bg-primary">
         <a class="icon-link icon-link-hand pull-left text-capitalize" ng-click="vm.modalEditDispositivo('md', dispositivo)">{{dispositivo.nome}}</a>
         <span class="pull-right icon-link-hand" data-toggle="tooltip" title="Excluir"><i class="fa fa-trash text-danger" data-toggle="modal" data-target=".modal-excluir-dispositivo"></i></span>
+        <!-- <span class="pull-right icon-link-hand" data-toggle="tooltip" title="Excluir"><i class="fa fa-trash text-danger" ng-click="vm.removeDispositivo(dispositivo)"></i></span> -->
         <a class="icon-link pull-right icon-link-hand" ng-click="vm.modalEditDispositivo('md', dispositivo)" data-toggle="tooltip" title="Editar"><i class="fa fa-edit"></i></a>
         <div class="clearfix"></div>
       </div>
-      <!-- Small modal -->
-      <div class="modal fade modal-excluir-dispositivo" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-md">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h4>{{dispositivo.nome}}</h4>
-            </div>
-            <div class="modal-body">
-              <h5>Tem certeza de que deseja excluir o dispostivo <strong>{{dispositivo.nome}}</strong>?</h5>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Cancelar/Voltar</button>
-              <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="vm.removeDispositivo(dispositivo)"><i class="fa fa-trash"></i> Excluir</button>
-            </div>
+    </div>
+    <!-- Small modal -->
+    <div class="modal fade modal-excluir-dispositivo" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-md">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4>{{dispositivo.nome}}</h4>
+          </div>
+          <div class="modal-body">
+            <h5>Tem certeza de que deseja excluir o dispostivo <strong>{{dispositivo.nome}}</strong>?</h5>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Cancelar/Voltar</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="vm.removeDispositivo(dispositivo)"><i class="fa fa-trash"></i> Excluir</button>
           </div>
         </div>
       </div>
-      <!--Fim Small modal -->
     </div>
+    <!--Fim Small modal -->
   </div>
   <!--Fim painel admin-->
   <!--Início painel user-->
@@ -63,6 +64,7 @@
   </div>
 </div>
 <!--Fim painel user-->
+
 <div class="alert alert-warning text-center" data-ng-if="vm.ambiente.$resolved &&!vm.ambiente.dispositivos.length">
-  Nenhum dispositivo cadastrado neste ambiente. <a class="alert-link" ng-click="vm.modalCreateDispositivo('md', vm.ambiente)"> Incluir dispositivo.</a>
+  Nenhum dispositivo cadastrado neste ambiente. <a ng-show="vm.authentication.user.isAdmin" class="alert-link" ng-click="vm.modalCreateDispositivo('md', vm.ambiente)"> Incluir dispositivo.</a>
 </div>
