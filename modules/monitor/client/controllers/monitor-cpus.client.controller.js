@@ -34,15 +34,15 @@
       }, 10000);
 
       // Add an event listener to the 'chatMessage' event
-      Socket.on('utilizacao_cpus', function(utilizacaoCpus){
+      Socket.on('utilizacao_cpus', function(utilizacaoCpus) {
         for(var i in utilizacaoCpus) {
           var uso = utilizacaoCpus[i];
-          if(vm.series && vm.series[i] && vm.series[i].values && vm.series[i].values.length > 5) {
+          if(vm.series && vm.series[i] && vm.series[i].values && vm.series[i].values.length > 9) {
             vm.series[i].values.shift();
           } else if(vm.series && vm.series[i] === undefined) {
             vm.series.push({ 'key': 'CPU-' + i, 'values': [] });
           }
-          vm.series[i].values.push({ 'x': uso.index, 'y': uso.percentagem });
+          vm.series[i].values.push({ 'x': Date.now(), 'y': uso.percentagem });
           if(vm.data1[0].values[i]) {
             vm.data1[0].values.splice(i, 1, { 'label': 'CPU-' + i, 'value': uso.percentagem });
           } else {
@@ -73,7 +73,7 @@
           top: 32,
           right: 32,
           bottom: 32,
-          left: 48
+          left: 55
         },
         noData: 'Capturando dados da CPU...',
         duration: 250,

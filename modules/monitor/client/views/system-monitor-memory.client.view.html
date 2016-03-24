@@ -1,4 +1,4 @@
-<section ng-controller="MonitorController as vm">
+<section ng-controller="MonitorMemoriaController as vm">
   <div class="panel panel-primary">
     <div class="panel-heading">
       <h4>Memória</h4>
@@ -14,10 +14,8 @@
     </div>
 
     <div>
-      <nvd3 options="vm.optionsMemoria"
-        data="vm.dataMemoria"
-        config="vm.config"
-        api="api"></nvd3>
+      <nvd3 options="vm.options"
+        data="vm.data"></nvd3>
     </div>
     </div>
 </section>

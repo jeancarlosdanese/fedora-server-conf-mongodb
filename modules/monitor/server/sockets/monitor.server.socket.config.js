@@ -20,7 +20,9 @@ module.exports = function (io, socket) {
         // console.log(sprintf('%s', function() { return new Date().toString(); }));
         percentuaisUsoCpus(function(utilizacaoCpus) {
           io.emit('utilizacao_cpus', utilizacaoCpus);
-          // console.log(utilizacaoCpus);
+        });
+        dadosMemoria(function(utilizacaoMemoria) {
+          io.emit('utilizacao_memoria', utilizacaoMemoria);
         });
       }, interval);
     }
@@ -39,27 +41,6 @@ module.exports = function (io, socket) {
   });
 
   // Calcula e o percentual de uso das cpus retornando um array de utilizacaoCpus
-  /*function percentuaisUsoCpus(interval, callback) {
-    console.log('====>> intervalo: ' + interval);
-    var utilizacaoCpus = [];
-    dadosCpusStart = dadosCpus();
-
-    setTimeout(function() {
-      var dadosCpusEnd = dadosCpus();
-
-      for(var i in dadosCpusEnd) {
-        var diffTotalTimes = dadosCpusEnd[i].totalTimes - dadosCpusStart[i].totalTimes;
-        var diffIdle = dadosCpusEnd[i].idle - dadosCpusStart[i].idle;
-
-        var percentagem = 100 - (100 * (diffIdle / diffTotalTimes));
-        utilizacaoCpus.push({ index: Date.now(), cpu: i, percentagem: percentagem });
-      }
-      callback(utilizacaoCpus);
-
-    }, interval);
-  }*/
-
-  // Calcula e o percentual de uso das cpus retornando um array de utilizacaoCpus
   function percentuaisUsoCpus(callback) {
     var utilizacaoCpus = [];
 
@@ -70,7 +51,7 @@ module.exports = function (io, socket) {
       var diffIdle = dadosCpusEnd[i].idle - dadosCpusStart[i].idle;
 
       var percentagem = 100 - (100 * (diffIdle / diffTotalTimes));
-      utilizacaoCpus.push({ index: Date.now(), cpu: i, percentagem: percentagem });
+      utilizacaoCpus.push({ percentagem: percentagem });
     }
     callback(utilizacaoCpus);
     dadosCpusStart = dadosCpus();
@@ -78,11 +59,11 @@ module.exports = function (io, socket) {
 
   // retorna um array de dadosCpus
   function dadosCpus() {
-    var totalIdle = 0, totalTimes = 0;
     var cpus = os.cpus();
     var dados = [];
 
     for(var i in cpus) {
+      var totalIdle = 0, totalTimes = 0;
       var cpu = cpus[i];
 
       for(var t in cpu.times) {
@@ -96,6 +77,13 @@ module.exports = function (io, socket) {
     }
 
     return dados;
+  }
+
+  function dadosMemoria(callback) {
+    var memoriaTotal = os.totalmem();
+    var memoriaLivre = os.freemem();
+
+    callback({ 'memoriaTotal': memoriaTotal, 'memoriaLivre': memoriaLivre });
   }
 
 };
