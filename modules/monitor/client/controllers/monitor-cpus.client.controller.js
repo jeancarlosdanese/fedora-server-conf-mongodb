@@ -29,7 +29,7 @@
         Socket.connect();
       }
 
-      Socket.emit('start_monitor_cpu');
+      Socket.emit('utilizacao_cpus');
       var intervaloTempoCpu = $interval(function () {
         Socket.emit('start_monitor_cpu');
       }, 10000);

@@ -29,7 +29,7 @@
         Socket.connect();
       }
 
-      Socket.emit('start_monitor_discos');
+      Socket.emit('utilizacao_discos');
       var intervaloTempoDiscos = $interval(function () {
         Socket.emit('start_monitor_discos');
       }, 600000);

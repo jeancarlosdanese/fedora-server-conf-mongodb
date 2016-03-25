@@ -26,6 +26,10 @@ module.exports = function (io, socket) {
     }
   });
 
+  socket.on('utilizacao_cpus', function() {
+    atualizaPercentuaisCpus();
+  });
+
   function atualizaPercentuaisCpus() {
     percentuaisUsoCpus(function(utilizacaoCpus) {
       io.emit('utilizacao_cpus', utilizacaoCpus);
@@ -50,6 +54,10 @@ module.exports = function (io, socket) {
     }
   });
 
+  socket.on('utilizacao_discos', function() {
+    atualizaPercentuaisDiscos();
+  });
+
   function atualizaPercentuaisDiscos() {
     dadosDisco(function(dadosDisco) {
       io.emit('utilizacao_discos', dadosDisco);
@@ -72,6 +80,10 @@ module.exports = function (io, socket) {
         atualizaPercentuaisMemoria();
       }, 10000);
     }
+  });
+
+  socket.on('utilizacao_memoria', function() {
+    atualizaPercentuaisMemoria();
   });
 
   // limpa o intervalo de monitoramento de memória

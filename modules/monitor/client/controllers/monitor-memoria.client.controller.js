@@ -28,7 +28,7 @@
         Socket.connect();
       }
 
-      Socket.emit('start_monitor_memoria');
+      Socket.emit('utilizacao_memoria');
       var intervaloTempoMemoria = $interval(function () {
         Socket.emit('start_monitor_memoria');
       }, 20000);
