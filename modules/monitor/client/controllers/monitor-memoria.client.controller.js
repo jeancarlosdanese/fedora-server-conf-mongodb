@@ -114,7 +114,8 @@
             left: 0
           },
           rightAlign: true
-        }
+        },
+        showLegend: false
       }
     };
 

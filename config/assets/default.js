@@ -20,13 +20,14 @@ module.exports = {
         'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
         'public/lib/angular-file-upload/angular-file-upload.js',
         'public/lib/owasp-password-strength-test/owasp-password-strength-test.js',
+        'public/lib/jquery/dist/jquery.min.js',
         'public/lib/Chart.js/Chart.js',
         'public/lib/angular-chart.js/dist/angular-chart.js',
         'public/lib/d3/d3.js',
         'public/lib/nvd3/build/nv.d3.js',
         'public/lib/angular-nvd3/dist/angular-nvd3.js',
-        'public/lib/jquery/dist/jquery.min.js',
-        'public/lib/bootstrap/dist/js/bootstrap.min.js'
+        'public/lib/bootstrap/dist/js/bootstrap.min.js',
+        'public/lib/jquery.easy-pie-chart/dist/angular.easypiechart.js'
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']
     },

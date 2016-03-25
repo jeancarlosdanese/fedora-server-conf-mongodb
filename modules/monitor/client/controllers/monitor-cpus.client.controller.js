@@ -13,6 +13,7 @@
 
     vm.series = [];
     vm.data1 = [{ key: 'Uso dos processadores', values: [] }];
+    vm.data2 = [];
 
     init();
 
@@ -37,19 +38,33 @@
       Socket.on('utilizacao_cpus', function(utilizacaoCpus) {
         for(var i in utilizacaoCpus) {
           var uso = utilizacaoCpus[i];
+
           if(vm.series && vm.series[i] && vm.series[i].values && vm.series[i].values.length > 9) {
             vm.series[i].values.shift();
           } else if(vm.series && vm.series[i] === undefined) {
             vm.series.push({ 'key': 'CPU-' + i, 'values': [] });
           }
           vm.series[i].values.push({ 'x': Date.now(), 'y': uso.percentagem });
+
           if(vm.data1[0].values[i]) {
             vm.data1[0].values.splice(i, 1, { 'label': 'CPU-' + i, 'value': uso.percentagem });
           } else {
             vm.data1[0].values.push({ 'label': 'CPU-' + i, 'value': uso.percentagem });
           }
+
+          if(vm.data2 && vm.data2[i] && vm.data2[i].values && vm.data2[i].values.length > 0) {
+            vm.data2[i].values.shift();
+          } else if(vm.data2 && vm.data2[i] === undefined) {
+            vm.data2.push({ 'key': 'CPU-' + i, 'values': [] });
+          }
+          vm.data2[i].values.push({ 'label': 'CPU-' + i, 'value': uso.percentagem });
+
         }
       });
+
+      /*Socket.on('utilizacao_discos', function(dadosDisco) {
+        console.log(dadosDisco);
+      });*/
 
       // Remove the event listener when the controller instance is destroyed
       $scope.$on('$destroy', function () {
@@ -115,7 +130,8 @@
             left: 0
           },
           rightAlign: false
-        }
+        },
+        showLegend: false
       }
     };
 
@@ -128,12 +144,12 @@
           deepWatchData  : true
         },
         type: 'discreteBarChart',
-        height: 300,
+        height: 250,
         margin : {
           top: 20,
           right: 20,
           bottom: 50,
-          left: 55
+          left: 20
         },
         x: function(d) {
           return d.label;
@@ -141,18 +157,43 @@
         y: function(d) {
           return d3.format(',.2f')(d.value);
         },
+        showYAxis: false,
         showValues: true,
         valueFormat: function(d){
-          return d3.format(',.2f')(d) + ' %';
+          return d3.format(',.1f')(d) + '%';
         },
         duration: 500,
         useInteractiveGuideline: true,
-        yDomain: [0, 100],
+        // yDomain: [0, 100],
         yAxis: {
           tickFormat: function (d) {
             return d + ' %';
           }
-        }
+        },
+        showLegend: false,
+        showControls: false
+      }
+    };
+
+    vm.options2 = {
+      chart: {
+        type: 'multiBarHorizontalChart',
+        height: 300,
+        x: function(d){return d.label;},
+        y: function(d){return d.value;},
+        showValues: true,
+        duration: 500,
+        xAxis: {
+          showMaxMin: false
+        },
+        yAxis: {
+          axisLabel: 'Values',
+          tickFormat: function(d){
+              //return d3.format(',.0f')(d);
+          }
+        },
+        showLegend: false,
+        showControls: false
       }
     };
 

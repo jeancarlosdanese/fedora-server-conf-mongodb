@@ -1,12 +1,15 @@
-<section ng-controller="MonitorController">
+<section ng-controller="MonitorDiscosController as vm">
   <div class="panel panel-primary">
   	<div class="panel-heading">
 	    <h4>HD</h4>
 	  </div>
 	  <div>
-	    <nvd3 options="options2"
-	      data="data2">
-	    </nvd3>
+      <div easypiechart options="vm.pieOptions1" percent="vm.piePercent1">
+        <span ng-bind="vm.piePercent1"></span>
+      </div>
+	    <!--<nvd3 options="vm.options2"
+	      data="vm.data2">
+	    </nvd3>-->
 	  </div>
   </div>
 

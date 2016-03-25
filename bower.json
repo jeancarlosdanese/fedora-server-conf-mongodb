@@ -18,7 +18,8 @@
     "angular-ui-mask": "^1.8.1",
     "font-awesome": "FortAwesome/Font-Awesome#^4.5.0",
     "angular-chart.js": "^0.8.8",
-    "angular-nvd3": "^1.0.5"
+    "angular-nvd3": "^1.0.5",
+    "jquery.easy-pie-chart": "^2.1.6"
   },
   "resolutions": {
     "angular": "~1.3"
