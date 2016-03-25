@@ -48,7 +48,7 @@
       barColor: '#2C3E50',
       // trackColor: colors.byName('inverse'),
       scaleColor: false,
-      lineWidth: 10,
+      lineWidth: 20,
       lineCap: 'circle'
     };
 
