@@ -5,15 +5,15 @@
     .module('monitor')
     .controller('MonitorDiscosController', MonitorDiscosController);
 
-  MonitorDiscosController.$inject = ['$interval', '$state', 'Authentication', 'Socket', '$window'];
+  MonitorDiscosController.$inject = ['$interval', '$scope', '$state', 'Authentication', 'Socket', '$window'];
 
-  function MonitorDiscosController($interval, $state, Authentication, Socket, $window) {
+  function MonitorDiscosController($interval, $scope, $state, Authentication, Socket, $window) {
     var vm = this;
     var d3 = $window.d3;
 
     vm.piePercent1 = 75;
 
-    vm.data = [{ key: 'Utilização da Discos', values: [] }];
+    vm.discos = [];
 
     init();
 
@@ -30,12 +30,19 @@
       }
 
       Socket.emit('start_monitor_discos');
-      var intervaloTempoCpu = $interval(function () {
+      var intervaloTempoDiscos = $interval(function () {
         Socket.emit('start_monitor_discos');
-      }, 30000);
+      }, 600000);
 
       Socket.on('utilizacao_discos', function(dadosDiscos){
-        console.log(dadosDiscos);
+        vm.discos = dadosDiscos;
+        console.log(vm.discos);
+      });
+
+      $scope.$on('$destroy', function () {
+        $interval.cancel(intervaloTempoDiscos);
+        Socket.emit('stop_monitor_discos');
+        Socket.removeListener('utilizacao_discos');
       });
 
     }

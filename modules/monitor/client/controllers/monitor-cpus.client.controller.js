@@ -5,9 +5,9 @@
     .module('monitor')
     .controller('MonitorCpusController', MonitorCpusController);
 
-  MonitorCpusController.$inject = ['$http', '$interval', '$scope', '$state', 'Authentication', 'Socket', '$window'];
+  MonitorCpusController.$inject = ['$interval', '$scope', '$state', 'Authentication', 'Socket', '$window'];
 
-  function MonitorCpusController($http, $interval, $scope, $state, Authentication, Socket, $window) {
+  function MonitorCpusController($interval, $scope, $state, Authentication, Socket, $window) {
     var vm = this;
     var d3 = $window.d3;
 
@@ -70,7 +70,7 @@
       $scope.$on('$destroy', function () {
         // console.log('destroy socket cpus');
         Socket.emit('stop_monitor_cpu');
-        // $interval.cancel(intervaloTempoCpu);
+        $interval.cancel(intervaloTempoCpu);
         Socket.removeListener('utilizacao_cpus');
       });
     }

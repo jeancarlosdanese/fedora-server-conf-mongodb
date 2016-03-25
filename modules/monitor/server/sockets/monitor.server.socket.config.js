@@ -7,36 +7,30 @@ var os = require('os'),
 // var index = 20;
 var monitorCpuId;
 var monitorDiscosId;
+var monitorMemoriaId;
 
 // Configuração de socket para monitoramento de desempenho
 module.exports = function (io, socket) {
 
   var dadosCpusStart = dadosCpus();
 
+  /**  Métodos para monitoramento do processador */
+
   // gera series para o gráfico de monitoramento de processadores
   socket.on('start_monitor_cpu', function () {
     if(monitorCpuId === undefined) {
+      atualizaPercentuaisCpus();
       monitorCpuId = setInterval(function() {
-        // console.log(sprintf('%s', function() { return new Date().toString(); }));
-        percentuaisUsoCpus(function(utilizacaoCpus) {
-          io.emit('utilizacao_cpus', utilizacaoCpus);
-        });
-        dadosMemoria(function(utilizacaoMemoria) {
-          io.emit('utilizacao_memoria', utilizacaoMemoria);
-        });
+        atualizaPercentuaisCpus();
       }, 3000);
     }
   });
 
-  socket.on('start_monitor_discos', function () {
-    if(monitorDiscosId === undefined) {
-      monitorDiscosId = setInterval(function() {
-        dadosDisco(function(dadosDisco) {
-          io.emit('utilizacao_discos', dadosDisco);
-        });
-      }, 6000);
-    }
-  });
+  function atualizaPercentuaisCpus() {
+    percentuaisUsoCpus(function(utilizacaoCpus) {
+      io.emit('utilizacao_cpus', utilizacaoCpus);
+    });
+  }
 
   // limpa o intervalo de monitoramento dos processadores
   socket.on('stop_monitor_cpu', function () {
@@ -44,11 +38,55 @@ module.exports = function (io, socket) {
     monitorCpuId = undefined;
   });
 
-  // limpa o intervalo de monitoramento dos processadores
+
+  /**  Métodos para monitoramento do disco/partições */
+
+  socket.on('start_monitor_discos', function () {
+    if(monitorDiscosId === undefined) {
+      atualizaPercentuaisDiscos();
+      monitorDiscosId = setInterval(function() {
+        atualizaPercentuaisDiscos();
+      }, 300000);
+    }
+  });
+
+  function atualizaPercentuaisDiscos() {
+    dadosDisco(function(dadosDisco) {
+      io.emit('utilizacao_discos', dadosDisco);
+    });
+  }
+
+  // limpa o intervalo de monitoramento de discos
   socket.on('stop_monitor_discos', function () {
     clearInterval(monitorDiscosId);
     monitorDiscosId = undefined;
   });
+
+
+  /**  Métodos para monitoramento da memória */
+
+  socket.on('start_monitor_memoria', function () {
+    if(monitorMemoriaId === undefined) {
+      atualizaPercentuaisMemoria();
+      monitorMemoriaId = setInterval(function() {
+        atualizaPercentuaisMemoria();
+      }, 10000);
+    }
+  });
+
+  // limpa o intervalo de monitoramento de memória
+  function atualizaPercentuaisMemoria() {
+    dadosMemoria(function(utilizacaoMemoria) {
+      io.emit('utilizacao_memoria', utilizacaoMemoria);
+    });
+  }
+
+  // limpa o intervalo de monitoramento de discos
+  socket.on('stop_monitor_memoria', function () {
+    clearInterval(monitorMemoriaId);
+    monitorMemoriaId = undefined;
+  });
+
 
   // Emit the status event when a socket client is disconnected
   socket.on('disconnect', function () {
@@ -129,13 +167,13 @@ module.exports = function (io, socket) {
           });
 
           var disco = { 'montagem': camposLimpos[0].trim(),
-                      'tipo': camposLimpos[1].trim(),
-                      'tamanho': camposLimpos[2].trim(),
-                      'usado': camposLimpos[3].trim(),
-                      'disponival': camposLimpos[4].trim(),
-                      'uso': camposLimpos[5].trim(),
-                      'particao': camposLimpos[6].trim()
-                    };
+                        'tipo': camposLimpos[1].trim(),
+                        'tamanho': (Number(camposLimpos[2].trim()) / 1024).toFixed(2),
+                        'usado': camposLimpos[3].trim(),
+                        'disponival': camposLimpos[4].trim(),
+                        'uso': Number(camposLimpos[5].trim().replace('%', '')),
+                        'particao': camposLimpos[6].trim()
+                      };
           discos.push(disco);
         }
       });

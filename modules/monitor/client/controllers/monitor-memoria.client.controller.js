@@ -5,9 +5,9 @@
     .module('monitor')
     .controller('MonitorMemoriaController', MonitorMemoriaController);
 
-  MonitorMemoriaController.$inject = ['$http', '$interval', '$scope', '$state', 'Authentication', 'Socket', '$window'];
+  MonitorMemoriaController.$inject = ['$interval', '$scope', '$state', 'Authentication', 'Socket', '$window'];
 
-  function MonitorMemoriaController($http, $interval, $scope, $state, Authentication, Socket, $window) {
+  function MonitorMemoriaController($interval, $scope, $state, Authentication, Socket, $window) {
     var vm = this;
     var d3 = $window.d3;
     var corMemoria = 'rgba(63, 81, 181, 0.80)';
@@ -29,9 +29,9 @@
       }
 
       Socket.emit('start_monitor_memoria');
-      var intervaloTempoCpu = $interval(function () {
+      var intervaloTempoMemoria = $interval(function () {
         Socket.emit('start_monitor_memoria');
-      }, 30000);
+      }, 20000);
 
       Socket.on('utilizacao_memoria', function(utilizacaoMemoria) {
         // console.log(utilizacaoMemoria);
@@ -57,6 +57,12 @@
         // vm.data[1].values.push({ 'x': valX, 'y': utilizacaoMemoria.memoriaLivre / (1024 * 1024 * 1024) });
 
         // console.log(vm.data);
+      });
+
+      $scope.$on('$destroy', function () {
+        $interval.cancel(intervaloTempoMemoria);
+        Socket.emit('stop_monitor_memoria');
+        Socket.removeListener('utilizacao_memoria');
       });
 
     }
