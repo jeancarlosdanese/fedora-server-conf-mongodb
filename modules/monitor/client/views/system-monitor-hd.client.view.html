@@ -7,18 +7,7 @@
       <!--<div class="chart" easypiechart options="vm.pieOptions1" percent="vm.piePercent1">
         <span class="percentual" ng-bind="vm.piePercent1"></span>
       </div>-->
-      <div class="row" ng-repeat="disco in vm.discos">
-        <div class="col-md-5">
-          <span class="chart" easypiechart options="vm.pieOptions1" percent="disco.uso">
-      			<span class="percentual" ng-bind="disco.uso"></span>
-      		</span>
-        </div>
-        <div class="col-md-7 pull-right">
-          <p>Partição: {{disco.particao}}</p>
-          <p>Tipo: {{disco.tipo}}</p>
-          <p>Capacidade: {{disco.tamanho}} Gb</p>
-        </div>
-      </div>
+      <monitor-discos></monitor-discos>
 	    <!--<nvd3 options="vm.options2"
 	      data="vm.data2">
 	    </nvd3>-->
