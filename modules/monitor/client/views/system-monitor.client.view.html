@@ -1,16 +1,19 @@
 <session>
 	<div class="page-header">
-		<h1>Monitor</h1> 
+		<h1>Monitor</h1>
 	</div>
 
 	<!--MEMÓRIA-->
-	<div class="col-md-6" ng-include="'modules/monitor/client/views/system-monitor-memory.client.view.html'"></div>
+	<div class="row">
+		<monitor-memoria class="col-md-6"></monitor-memoria>
+		
+		<!--HD-->
+		<monitor-discos class="col-md-6"></monitor-discos>
+	</div>
+
 
 	<!--PROCESSADOR-->
 	<div class="col-md-6" ng-include="'modules/monitor/client/views/system-monitor-processador.client.view.html'"></div>
-
-	<!--HD-->
-	<div class="col-md-6" ng-include="'modules/monitor/client/views/system-monitor-hd.client.view.html'"></div>
 
 	<!--REDE-->
 	<div class="col-md-6" ng-include="'modules/monitor/client/views/system-monitor-rede.client.view.html'"></div>

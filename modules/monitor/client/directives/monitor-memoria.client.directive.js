@@ -4,14 +4,14 @@
   // Directive monitor-discos
   angular
     .module('monitor')
-    .directive('monitorDiscos', [function() {
+    .directive('monitorMemoria', [function() {
 
       return {
         restrict: 'E',
         transclude: true,
-        templateUrl: 'modules/monitor/client/views/monitor-discos.template.html',
-        controller: 'MonitorDiscosController',
-        controllerAs: 'monitorDiscosController'
+        templateUrl: 'modules/monitor/client/views/monitor-memoria.template.html',
+        controller: 'MonitorMemoriaController',
+        controllerAs: 'monitorMemoriaController'
         /*link: function(scope, element, attrs) {
 
         }*/

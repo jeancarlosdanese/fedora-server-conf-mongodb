@@ -36,7 +36,6 @@
 
       Socket.on('utilizacao_discos', function(dadosDiscos){
         vm.discos = dadosDiscos;
-        console.log(vm.discos);
       });
 
       $scope.$on('$destroy', function () {
