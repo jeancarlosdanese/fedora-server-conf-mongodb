@@ -20,9 +20,7 @@
 
     // Remove existing Grupo
     function remove() {
-      if (confirm('Tem certeza de que deseja excluir?')) {
-        vm.grupo.$remove($state.go('grupos.list'));
-      }
+      vm.grupo.$remove($state.go('grupos.list'));
     }
 
     // Save Grupo

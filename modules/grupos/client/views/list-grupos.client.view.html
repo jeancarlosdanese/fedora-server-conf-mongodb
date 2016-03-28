@@ -3,7 +3,7 @@
     <h1>Grupos</h1>
   </div>
   <div>
-    <a class="btn btn-primary" data-ui-sref="grupos.create"  data-ng-if="vm.grupos.$resolved && vm.grupos.length">
+    <a class="btn btn-primary" data-ui-sref="grupos.create"  data-ng-if="vm.grupos.$resolved && vm.grupos.length" ng-show="vm.authentication.user.isAdmin">
       <i class="fa fa-plus"></i> Incluir grupo
     </a>
   </div>
@@ -24,7 +24,8 @@
         </div>
         <div class="panel-footer bg-primary">
           <a class="icon-link pull-left text-capitalize" ui-sref="grupos.view({ grupoId: grupo._id })">{{grupo.nome}}</a>
-          <a class="icon-link pull-right" ui-sref="grupos.view({ grupoId: grupo._id })" data-toggle="tooltip" title="Editar"><i class="fa fa-edit"></i></a>
+          <a ng-show="vm.authentication.user.isAdmin"class="icon-link pull-right" ui-sref="grupos.view({ grupoId: grupo._id })" data-toggle="tooltip" title="Editar"><i class="fa fa-edit"></i></a>
+          <a ng-hide="vm.authentication.user.isAdmin" class="icon-link pull-right" ui-sref="grupos.view({ grupoId: grupo._id })" data-toggle="tooltip" title="Editar"><i class="fa fa-eye"></i></a>
           <div class="clearfix"></div>
         </div>
       </div>
@@ -32,6 +33,6 @@
   </div>
   <!--Fim painel-->
   <div class="alert alert-warning text-center" data-ng-if="vm.grupos.$resolved && !vm.grupos.length">
-    Nenhum grupo cadastrado. <a class="alert-link" data-ui-sref="grupos.create"> Incluir grupo</a>
+    Nenhum grupo cadastrado. <a class="alert-link" data-ui-sref="grupos.create" ng-show="vm.authentication.user.isAdmin"> Incluir grupo</a>
   </div>
 </section>

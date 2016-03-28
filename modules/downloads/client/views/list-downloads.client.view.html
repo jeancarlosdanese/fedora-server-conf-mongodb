@@ -54,6 +54,6 @@
   </div>
   <!--Fim painel-->
   <div class="alert alert-warning text-center" data-ng-if="vm.downloads.$resolved && !vm.downloads.length">
-    Nenhum download retrito cadastrado. <a class="alert-link" data-ui-sref="downloads.create"> Incluir download restrito</a>
+    Nenhum download retrito cadastrado. <a class="alert-link" data-ui-sref="downloads.create" ng-show="vm.authentication.user.isAdmin"> Incluir download restrito</a>
   </div>
 </section>
