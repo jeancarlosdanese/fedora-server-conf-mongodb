@@ -15,15 +15,7 @@
     vm.site = site;
     vm.error = null;
     vm.form = {};
-    vm.remove = remove;
     vm.save = save;
-
-    // Remove existing Site
-    function remove() {
-      if (confirm('Are you sure you want to delete?')) {
-        vm.site.$remove($state.go('sites.list'));
-      }
-    }
 
     // Save Site
     function save(isValid) {
