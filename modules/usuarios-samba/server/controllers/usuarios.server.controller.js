@@ -81,7 +81,7 @@ exports.delete = function(req, res) {
 /**
  * List of Usuarios
  */
-exports.list = function(req, res) { 
+exports.list = function(req, res) {
   Usuario.find().sort('-created').populate('user', 'displayName').exec(function(err, usuarios) {
     if (err) {
       return res.status(400).send({

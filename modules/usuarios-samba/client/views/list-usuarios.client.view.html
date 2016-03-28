@@ -23,13 +23,14 @@
           </div>
         </div>
         <div class="panel-footer bg-primary">
-          <a class="icon-link pull-left" ui-sref="usuarios.edit({ usuarioId: usuario._id })">{{usuario.nome}}</a>
-          <span class="pull-right icon-link-hand" data-toggle="tooltip" title="Excluir"><i class="fa fa-trash text-danger" data-toggle="modal" data-target=".modal-excluir"></i></span>
-          <a class="icon-link pull-right" ui-sref="usuarios.edit({ usuarioId: usuario._id })" data-toggle="tooltip" title="Editar"><i class="fa fa-edit"></i></a>
+          <a ng-show="vm.authentication.user.isAdmin" class="icon-link pull-left" ui-sref="usuarios.edit({ usuarioId: usuario._id })">{{usuario.nome}}</a>
+          <p ng-hide="vm.authentication.user.isAdmin" class="icon-link pull-left">{{usuario.nome}}</p>
+          <span ng-show="vm.authentication.user.isAdmin" class="pull-right icon-link-hand" data-toggle="tooltip" title="Excluir"><i class="fa fa-trash text-danger" data-toggle="modal" data-target=".modal{{usuario._id}}"></i></span>
+          <a ng-show="vm.authentication.user.isAdmin" class="icon-link pull-right" ui-sref="usuarios.edit({ usuarioId: usuario._id })" data-toggle="tooltip" title="Editar"><i class="fa fa-edit"></i></a>
           <div class="clearfix"></div>
         </div>
         <!-- Small modal -->
-        <div class="modal fade modal-excluir" tabindex="-1" role="dialog">
+        <div class="modal fade modal{{usuario._id}}" tabindex="-1" role="dialog">
           <div class="modal-dialog modal-md">
             <div class="modal-content">
               <div class="modal-header">
@@ -40,7 +41,7 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Cancelar/Voltar</button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="vm.removeUsuario(usuario)"><i class="fa fa-trash"></i> Excluir</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="vm.remove(usuario)"><i class="fa fa-trash"></i> Excluir</button>
               </div>
             </div>
           </div>

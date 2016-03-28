@@ -15,21 +15,10 @@
     vm.usuario = usuario;
     vm.error = null;
     vm.form = {};
-    vm.remove = remove;
     vm.save = save;
-
-    // Remove existing Usuario
-    function remove() {
-      if (confirm('Are you sure you want to delete?')) {
-        vm.usuario.$remove($state.go('usuarios.list'));
-      }
-    }
 
     // Save Usuario
     function save(isValid) {
-
-      console.log('entrou');
-
       if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'vm.form.usuarioForm');
         return false;
