@@ -15,15 +15,7 @@
     vm.download = download;
     vm.error = null;
     vm.form = {};
-    vm.remove = remove;
     vm.save = save;
-
-    // Remove existing Download
-    function remove() {
-      if (confirm('Tem certeza de que deseja excluir?')) {
-        vm.download.$remove($state.go('downloads.list'));
-      }
-    }
 
     // Save Download
     function save(isValid) {

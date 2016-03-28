@@ -3,7 +3,7 @@
     <h1 class="text-center">Restrições de downloads</h1>
   </div>
   <div>
-    <a data-ui-sref="downloads.create" class="btn btn-primary" data-ng-if="vm.downloads.$resolved && vm.downloads.length">
+    <a data-ui-sref="downloads.create" class="btn btn-primary" data-ng-if="vm.downloads.$resolved && vm.downloads.length" ng-show="vm.authentication.user.isAdmin">
       <i class="fa fa-plus"></i> Incluir download restrito
     </a>
   </div>
@@ -23,13 +23,16 @@
           </div>
         </div>
         <div class="panel-footer bg-primary">
-          <a class="icon-link pull-left" ui-sref="downloads.edit({ downloadId: download._id })">{{download.extensao}}</a>
-          <span class="pull-right icon-link-hand" data-toggle="tooltip" title="Excluir"><i class="fa fa-trash text-danger" data-toggle="modal" data-target=".modal-excluir"></i></span>
-          <a class="icon-link pull-right" ui-sref="downloads.edit({ downloadId: download._id })" data-toggle="tooltip" title="Editar"><i class="fa fa-edit"></i></a>
+          <!-- EXIBE PARA ADMIN -->
+          <a ng-show="vm.authentication.user.isAdmin" class="icon-link pull-left" ui-sref="downloads.edit({ downloadId: download._id })">{{download.extensao}}</a>
+          <!-- EXIBE PARA USER -->
+          <p ng-hide="vm.authentication.user.isAdmin" class="pull-left">{{download.extensao}}</p>
+          <span ng-show="vm.authentication.user.isAdmin" class="pull-right icon-link-hand" data-toggle="tooltip" title="Excluir"><i class="fa fa-trash text-danger" data-toggle="modal" data-target=".modal{{download._id}}"></i></span>
+          <a ng-show="vm.authentication.user.isAdmin" class="icon-link pull-right" ui-sref="downloads.edit({ downloadId: download._id })" data-toggle="tooltip" title="Editar"><i class="fa fa-edit"></i></a>
           <div class="clearfix"></div>
         </div>
         <!-- Small modal -->
-        <div class="modal fade modal-excluir" tabindex="-1" role="dialog">
+        <div class="modal fade modal{{download._id}}" tabindex="-1" role="dialog">
           <div class="modal-dialog modal-md">
             <div class="modal-content">
               <div class="modal-header">
@@ -40,7 +43,7 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Cancelar/Voltar</button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="vm.removeDownload(download)"><i class="fa fa-trash"></i> Excluir</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="vm.remove(download)"><i class="fa fa-trash"></i> Excluir</button>
               </div>
             </div>
           </div>
