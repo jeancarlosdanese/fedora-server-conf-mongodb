@@ -49,7 +49,7 @@
       }
 
       function successCallback(res) {
-        $state.go('ambientes.edit', {
+        $state.go('ambientes.list', {
           ambienteId: res._id
         });
       }
