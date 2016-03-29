@@ -20,8 +20,6 @@
     // Save Download
     function save(isValid) {
 
-      console.log('entrou');
-
       if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'vm.form.downloadForm');
         return false;

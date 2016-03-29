@@ -20,9 +20,9 @@
       <tbody>
         <tr ng-repeat="site in vm.sites">
           <!-- EXIBE PARA ADMIM -->
-          <td ng-show="vm.authentication.user.isAdmin"><a data-ui-sref="sites.edit({ siteId: site._id })"><h4 class="text-capitalize">{{site.nome}}</h4></a></td>
+          <td ng-show="vm.authentication.user.isAdmin"><a data-ui-sref="sites.edit({ siteId: site._id })"><h4 >{{site.nome}}</h4></a></td>
           <!-- EXIBE PARA USER -->
-          <td ng-hide="vm.authentication.user.isAdmin"><p><h4 class="text-capitalize">{{site.nome}}</h4></p></td>
+          <td ng-hide="vm.authentication.user.isAdmin"><p><h4>{{site.nome}}</h4></p></td>
           <td class="text-center">
             <a ng-show="vm.authentication.user.isAdmin" class="btn btn-primary" data-ui-sref="sites.edit({ siteId: site._id })" data-toggle="tooltip" title="Editar" ><i class="fa fa-edit"></i></a>
             <button ng-show="vm.authentication.user.isAdmin" type="button" class="btn btn-danger" data-toggle="modal" data-target=".modal{{site._id}}"><i class="fa fa-trash" data-toggle="tooltip" title="Excluir"></i></button>
