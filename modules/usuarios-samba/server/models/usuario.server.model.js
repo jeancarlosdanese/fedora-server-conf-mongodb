@@ -21,7 +21,7 @@ var UsuarioSchema = new Schema({
     trim: true,
     required: 'Senha não pode ser vazio.'
   },
-  grupo: [{
+  grupos: [{
     type: Schema.ObjectId,
     ref: 'Grupo'
   }],

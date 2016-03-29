@@ -82,7 +82,7 @@ exports.delete = function(req, res) {
  * List of Usuarios
  */
 exports.list = function(req, res) {
-  Usuario.find().sort('-created').populate('user', 'displayName').exec(function(err, usuarios) {
+  Usuario.find().sort('-created').populate('user', 'displayName').populate('grupos').exec(function(err, usuarios) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -104,7 +104,7 @@ exports.usuarioByID = function(req, res, next, id) {
     });
   }
 
-  Usuario.findById(id).populate('user', 'displayName').exec(function (err, usuario) {
+  Usuario.findById(id).populate('user', 'displayName').populate('grupos').exec(function (err, usuario) {
     if (err) {
       return next(err);
     } else if (!usuario) {

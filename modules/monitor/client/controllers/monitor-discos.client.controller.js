@@ -55,7 +55,7 @@
       // trackColor: colors.byName('inverse'),
       scaleColor: false,
       lineWidth: 20,
-      lineCap: 'circle'
+      lineCap: 'circle',
     };
 
   }

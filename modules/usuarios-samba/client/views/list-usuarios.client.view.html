@@ -17,8 +17,8 @@
             <div class="col-xs-5">
               <img alt="usuario icone" class="img-responsive" src="modules/usuarios-samba/client/img/usuario.png"/>
             </div>
-            <div class="col-xs-7 text-left">
-              <h5>Criação - Cetesc - Público - Suporte</h5>
+            <div class="col-xs-7 text-left" ng-repeat="grupo in usuario.grupos">
+              <h5>{{grupo.nome}}</h5>
             </div>
           </div>
         </div>

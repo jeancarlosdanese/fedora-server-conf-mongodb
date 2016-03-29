@@ -187,7 +187,7 @@
           showMaxMin: false
         },
         yAxis: {
-          axisLabel: 'Values',
+          //axisLabel: 'Values',
           tickFormat: function(d){
               //return d3.format(',.0f')(d);
           }

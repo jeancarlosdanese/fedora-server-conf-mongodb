@@ -6,9 +6,9 @@
     .module('usuarios')
     .controller('UsuariosController', UsuariosController);
 
-  UsuariosController.$inject = ['$scope', '$state', 'Authentication', 'usuarioResolve'];
+  UsuariosController.$inject = ['$scope', '$state', 'Authentication', 'usuarioResolve', 'GruposService'];
 
-  function UsuariosController ($scope, $state, Authentication, usuario) {
+  function UsuariosController ($scope, $state, Authentication, usuario, GruposService) {
     var vm = this;
 
     vm.authentication = Authentication;
@@ -16,6 +16,14 @@
     vm.error = null;
     vm.form = {};
     vm.save = save;
+    vm.grupos = GruposService.query();
+    vm.gruposSelecionados = [];
+
+    vm.gruposList = function (item, list) {
+      var idx = list.indexOf(item);
+      if (idx > -1) list.splice(idx, 1);
+      else list.push(item);
+    };
 
     // Save Usuario
     function save(isValid) {
@@ -23,6 +31,8 @@
         $scope.$broadcast('show-errors-check-validity', 'vm.form.usuarioForm');
         return false;
       }
+
+      vm.usuario.grupos = vm.gruposSelecionados;
 
       // TODO: move create/update logic to service
       if (vm.usuario._id) {

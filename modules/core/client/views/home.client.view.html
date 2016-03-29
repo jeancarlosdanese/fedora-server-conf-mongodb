@@ -4,10 +4,15 @@
   <div ng-include="'modules/core/client/views/list-ambientes.client.view.html'"></div>
 
   <!--GRAFICOS-->
-  <div class="col-md-12">
-    <monitor-discos></monitor-discos>
-    <monitor-memoria></monitor-memoria>
-    <!-- <div ng-include="'modules/monitor/client/views/system-monitor.client.view.html'"></div> -->
+  <div class="row">
+    <!--DISOS-->
+    <monitor-discos class="col-md-12"></monitor-discos>
+
+    <!--MEMÓRIA-->
+    <monitor-memoria class="col-md-12"></monitor-memoria>
+
+    <!--PROCESSADOR-->
+    <monitor-cpus class="col-md-12"></monitor-cpus>
   </div>
 
 </section>
