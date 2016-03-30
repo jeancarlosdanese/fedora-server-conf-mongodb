@@ -14,6 +14,27 @@
 
     vm.data = [{ key: 'Utilização da Memória', values: [] }];
 
+    vm.chartObject = {};
+    vm.chartObject.type = "Gauge";
+
+    vm.chartObject.options = {
+      // width: 400,
+      // height: 120,
+      redFrom: 90,
+      redTo: 100,
+      yellowFrom: 75,
+      yellowTo: 90,
+      minorTicks: 5,
+      vAxis: {
+        format: '#k'
+      }
+    };
+
+    vm.chartObject.data = [
+      ['Label', 'Value'],
+      ['Memória', 0]
+    ];
+
     init();
 
     function init() {
@@ -34,8 +55,8 @@
       }, 20000);
 
       Socket.on('utilizacao_memoria', function(utilizacaoMemoria) {
-        // console.log(utilizacaoMemoria);
 
+        // console.log(utilizacaoMemoria);
         if(vm.data && vm.data.length === 2 && vm.data[0].values && vm.data[0].values.length > 9) {
           vm.data[0].values.shift();
         }
@@ -45,13 +66,9 @@
         }*/
 
         var valX = Date.now();
-        var valY = ((utilizacaoMemoria.memoriaTotal - utilizacaoMemoria.memoriaLivre) / utilizacaoMemoria.memoriaTotal) * 100;
+        var valY = parseInt(((utilizacaoMemoria.memoriaTotal - utilizacaoMemoria.memoriaLivre) / utilizacaoMemoria.memoriaTotal) * 100);
 
-        if(valY > 60) {
-          corMemoria = 'rgba(255, 87, 34, 0.80)';
-        } else {
-          corMemoria = 'rgba(63, 81, 181, 0.80)';
-        }
+        vm.chartObject.data[1][1] = valY;
 
         vm.data[0].values.push({ 'x': valX, 'y': valY });
         // vm.data[1].values.push({ 'x': valX, 'y': utilizacaoMemoria.memoriaLivre / (1024 * 1024 * 1024) });
@@ -59,11 +76,11 @@
         // console.log(vm.data);
       });
 
-      $scope.$on('$destroy', function () {
+      /*$scope.$on('$destroy', function () {
         $interval.cancel(intervaloTempoMemoria);
         Socket.emit('stop_monitor_memoria');
         Socket.removeListener('utilizacao_memoria');
-      });
+      });*/
 
     }
 

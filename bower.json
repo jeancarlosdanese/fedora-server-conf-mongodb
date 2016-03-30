@@ -19,7 +19,8 @@
     "font-awesome": "FortAwesome/Font-Awesome#^4.5.0",
     "angular-chart.js": "^0.8.8",
     "angular-nvd3": "^1.0.5",
-    "jquery.easy-pie-chart": "^2.1.6"
+    "jquery.easy-pie-chart": "^2.1.6",
+    "angular-google-chart": "^0.1.0"
   },
   "resolutions": {
     "angular": "~1.3"

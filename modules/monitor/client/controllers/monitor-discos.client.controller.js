@@ -19,6 +19,8 @@
 
     function init() {
 
+      console.log('init discos');
+
       // If user is not signed in then redirect back home
       if (!Authentication.user) {
         $state.go('home');
@@ -38,11 +40,12 @@
         vm.discos = dadosDiscos;
       });
 
-      $scope.$on('$destroy', function () {
+      /*$scope.$on('$destroy', function () {
+        console.log('destroy');
         $interval.cancel(intervaloTempoDiscos);
         Socket.emit('stop_monitor_discos');
         Socket.removeListener('utilizacao_discos');
-      });
+      });*/
 
     }
 

@@ -17,7 +17,7 @@ module.exports = function (io, socket) {
   /**  Métodos para monitoramento do processador */
 
   // gera series para o gráfico de monitoramento de processadores
-  socket.on('start_monitor_cpu', function () {
+  socket.on('start_monitor_cpus', function () {
     if(monitorCpuId === undefined) {
       atualizaPercentuaisCpus();
       monitorCpuId = setInterval(function() {
@@ -37,11 +37,15 @@ module.exports = function (io, socket) {
   }
 
   // limpa o intervalo de monitoramento dos processadores
-  socket.on('stop_monitor_cpu', function () {
-    clearInterval(monitorCpuId);
-    monitorCpuId = undefined;
+  socket.on('stop_monitor_cpus', function () {
+    stopMonitorCpus();
   });
 
+  function stopMonitorCpus() {
+    console.log('stop socket cpus');
+    clearInterval(monitorCpuId);
+    monitorCpuId = undefined;
+  }
 
   /**  Métodos para monitoramento do disco/partições */
 
@@ -66,10 +70,14 @@ module.exports = function (io, socket) {
 
   // limpa o intervalo de monitoramento de discos
   socket.on('stop_monitor_discos', function () {
-    clearInterval(monitorDiscosId);
-    monitorDiscosId = undefined;
+    stopMonitorDiscos();
   });
 
+  function stopMonitorDiscos() {
+    console.log('stop socket discos');
+    clearInterval(monitorDiscosId);
+    monitorDiscosId = undefined;
+  }
 
   /**  Métodos para monitoramento da memória */
 
@@ -86,26 +94,29 @@ module.exports = function (io, socket) {
     atualizaPercentuaisMemoria();
   });
 
-  // limpa o intervalo de monitoramento de memória
   function atualizaPercentuaisMemoria() {
     dadosMemoria(function(utilizacaoMemoria) {
       io.emit('utilizacao_memoria', utilizacaoMemoria);
     });
   }
 
-  // limpa o intervalo de monitoramento de discos
+  // limpa o intervalo de monitoramento de memória
   socket.on('stop_monitor_memoria', function () {
-    clearInterval(monitorMemoriaId);
-    monitorMemoriaId = undefined;
+    stopMonitorMemoria();
   });
 
+  function stopMonitorMemoria() {
+    console.log('stop socket memória');
+    clearInterval(monitorMemoriaId);
+    monitorMemoriaId = undefined;
+  }
 
   // Emit the status event when a socket client is disconnected
   socket.on('disconnect', function () {
-    io.emit('stop_monitor_cpu');
-    io.emit('stop_monitor_discos');
-    // clearInterval(monitorCpuId);
-    // monitorCpuId = undefined;
+    console.log('socket disconnect');
+    stopMonitorCpus();
+    stopMonitorDiscos();
+    stopMonitorMemoria();
   });
 
   // Calcula e o percentual de uso das cpus retornando um array de utilizacaoCpus

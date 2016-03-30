@@ -26,7 +26,8 @@ module.exports = {
         'public/lib/d3/d3.min.js',
         'public/lib/nvd3/build/nv.d3.min.js',
         'public/lib/angular-nvd3/dist/angular-nvd3.min.js',
-        'public/lib/jquery.easy-pie-chart/dist/angular.easypiechart.min.js'
+        'public/lib/jquery.easy-pie-chart/dist/angular.easypiechart.min.js',
+        'public/lib/angular-google-chart/ng-google-chart.min.js'
       ]
     },
     css: 'public/dist/application.min.css',

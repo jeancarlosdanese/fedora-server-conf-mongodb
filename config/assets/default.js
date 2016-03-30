@@ -27,7 +27,8 @@ module.exports = {
         'public/lib/nvd3/build/nv.d3.js',
         'public/lib/angular-nvd3/dist/angular-nvd3.js',
         'public/lib/bootstrap/dist/js/bootstrap.min.js',
-        'public/lib/jquery.easy-pie-chart/dist/angular.easypiechart.js'
+        'public/lib/jquery.easy-pie-chart/dist/angular.easypiechart.js',
+        'public/lib/angular-google-chart/ng-google-chart.js'
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']
     },

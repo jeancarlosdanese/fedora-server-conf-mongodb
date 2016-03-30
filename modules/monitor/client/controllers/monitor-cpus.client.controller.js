@@ -31,7 +31,7 @@
 
       Socket.emit('utilizacao_cpus');
       var intervaloTempoCpu = $interval(function () {
-        Socket.emit('start_monitor_cpu');
+        Socket.emit('start_monitor_cpus');
       }, 10000);
 
       // Add an event listener to the 'chatMessage' event
@@ -67,12 +67,12 @@
       });*/
 
       // Remove the event listener when the controller instance is destroyed
-      $scope.$on('$destroy', function () {
+      /*$scope.$on('$destroy', function () {
         // console.log('destroy socket cpus');
-        Socket.emit('stop_monitor_cpu');
+        Socket.emit('stop_monitor_cpus');
         $interval.cancel(intervaloTempoCpu);
         Socket.removeListener('utilizacao_cpus');
-      });
+      });*/
     }
 
     vm.options = {
