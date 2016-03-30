@@ -1,13 +1,39 @@
-<div class="panel panel-primary">
+<!--<div class="panel panel-primary">
   <div class="panel-heading">
     <h4>Memória</h4>
   </div>
-  <div class="panel-body">
-    <div>
+  <div class="col-md-12 row">
+    <div class="panel-body">
+      <div class="col-md-9">
+        <nvd3 options="monitorMemoriaController.options"
+          data="monitorMemoriaController.data">
+        </nvd3>
+      </div>
+      <div class="col-md-3 pull-right text-center" style="margin-top:5%;">
+        <div google-chart chart="monitorMemoriaController.chartObject"></div>
+      </div>
+    </div>
+
+  </div>
+</div>-->
+
+<div class="row">
+  <div class="text-center">
+    <h1>Memória</h1>
+  </div>
+  <div class="list-group">
+    <div class="col-md-9 panel panel-default" style="background-color: #f0c2e0;">
       <nvd3 options="monitorMemoriaController.options"
         data="monitorMemoriaController.data">
       </nvd3>
     </div>
+    <div class="panel panel-default col-md-3 col-sm-3" style="float: right; background-color: #a3297a">
+      <div class="text-center" style="padding-left: 10%">
+        <div google-chart chart="monitorMemoriaController.chartObject"></div>
+      </div>
+      <div class="text-center panel-footer" style="padding-bottom: 50px; background-color: #a3297a; color: white;">
+        <h4>Memória</h4>
+      </div>
+    </div>
   </div>
-  <div google-chart chart="monitorMemoriaController.chartObject"></div>
 </div>

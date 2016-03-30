@@ -1,4 +1,4 @@
-<div class="panel panel-primary">
+<!--<div class="panel panel-primary">
   <div class="panel-heading">
     <h4>Discos</h4>
   </div>
@@ -13,6 +13,29 @@
           <p>Partição: {{disco.particao}}</p>
           <p>Tipo: {{disco.tipo}}</p>
           <p>Capacidade: {{disco.tamanho}} Gb</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+-->
+
+<div class="row">
+  <div class="text-center">
+    <h1>Uso de Discos</h1>
+  </div>
+  <div class="list-group ">
+    <div ng-repeat="disco in monitorDiscosController.discos">
+      <div class="col-md-3 col-sm-6 col-xs-12" >
+        <div class="panel panel-default text-center" style="background-color: #29a3a3;">
+          <span class="chart" easypiechart options="monitorDiscosController.pieOptions1" percent="disco.uso">
+            <span class="percentual" ng-bind="disco.uso"></span>
+          </span>
+          <div class="pull-rigth  panel-footer text-left" style="background-color: #29a3a3; color: white;">
+            <p>Partição: {{disco.particao}}</p>
+            <p>Tipo: {{disco.tipo}}</p>
+            <p>Capacidade: {{disco.tamanho}} Gb</p>
+          </div>
         </div>
       </div>
     </div>
