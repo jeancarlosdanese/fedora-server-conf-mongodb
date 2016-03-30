@@ -179,6 +179,8 @@
       chart: {
         type: 'multiBarHorizontalChart',
         height: 300,
+        //color:(['#003300']),
+        barColor: d3.scale.category20().range(),
         x: function(d){return d.label;},
         y: function(d){return d.value;},
         showValues: true,
@@ -187,11 +189,12 @@
           showMaxMin: false
         },
         yAxis: {
-          //axisLabel: 'Values',
+          axisLabel: 'Processadores',
           tickFormat: function(d){
               //return d3.format(',.0f')(d);
           }
         },
+        showGrid: false,
         showLegend: false,
         showControls: false
       }

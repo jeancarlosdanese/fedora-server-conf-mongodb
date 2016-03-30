@@ -9,7 +9,7 @@
 	      data="monitorCpusController.data">
 	    </nvd3>
     </div>-->
-		<!-- GRAFICO DE BARRA HOEIZONTAL-->
+		<!-- GRAFICO DE BARRA HORIZONTAL-->
 	<!--	<div class="col-md-4">
 			<nvd3 options="monitorCpusController.options2"
 				data="monitorCpusController.data1">
@@ -24,28 +24,22 @@
   <!--</div>
 </div>-->
 
-<div class="row" ng-controller="MonitorCpusController as monitorCpusController">
+<div ng-controller="MonitorCpusController as monitorCpusController">
 	<div class="text-center">
     <h1>Processadores ( CPUs )</h1>
   </div>
-  <div class="">
-		<!-- GRAFICO DE LINHA -->
-    <div class="col-md-8 panel panel-default">
-			<nvd3 options="monitorCpusController.options"
-	      data="monitorCpusController.data">
-	    </nvd3>
-    </div>
-		<!-- GRAFICO DE BARRA HOEIZONTAL-->
-		<div class="col-md-4 panel panel-default">
+  <div class="row">
+		<!-- GRAFICO DE BARRA HORIZONTAL-->
+		<div class="col-md-3 panel panel-info float: right" style="background-color: #2d8659; margin-left: 30px;">
 			<nvd3 options="monitorCpusController.options2"
 				data="monitorCpusController.data1">
 			</nvd3>
 		</div>
-		<!-- GRAFICO DE BARRA -->
-		<!--<div class="col-md-8">
-			<nvd3 options="monitorCpusController.options1"
-				data="monitorCpusController.data1">
-			</nvd3>
-		</div>-->
+		<!-- GRAFICO DE LINHA -->
+		<div class="col-md-8 panel panel-default" style="background-color: #53c68c; margin-left: 30px; ">
+			<nvd3 options="monitorCpusController.options"
+			data="monitorCpusController.data">
+		</nvd3>
+	</div>
   </div>
 </div>

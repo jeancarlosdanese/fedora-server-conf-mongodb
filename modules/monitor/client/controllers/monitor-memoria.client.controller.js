@@ -11,7 +11,7 @@
     var vm = this;
     var d3 = $window.d3;
     //var corMemoria = 'rgba(63, 81, 181, 0.80)';
-    var corMemoria = 'rgba(143, 36, 101, 1)';
+    var corMemoria = 'rgba(92, 138, 138, 1)';
 
     vm.data = [{ key: 'Utilização da Memória', values: [] }];
 
