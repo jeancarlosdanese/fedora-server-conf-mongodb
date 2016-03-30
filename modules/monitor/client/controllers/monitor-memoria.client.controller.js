@@ -15,7 +15,7 @@
     vm.data = [{ key: 'Utilização da Memória', values: [] }];
 
     vm.chartObject = {};
-    vm.chartObject.type = "Gauge";
+    vm.chartObject.type = 'Gauge';
 
     vm.chartObject.options = {
       // width: 400,
