@@ -67,9 +67,9 @@
         }*/
 
         var valX = Date.now();
-        var valY = parseInt(((utilizacaoMemoria.memoriaTotal - utilizacaoMemoria.memoriaLivre) / utilizacaoMemoria.memoriaTotal) * 100);
+        var valY = utilizacaoMemoria.physical.used;
 
-        vm.chartObject.data[1][1] = valY;
+        vm.chartObject.data[1][1] = parseInt(valY);
 
         vm.data[0].values.push({ 'x': valX, 'y': valY });
         // vm.data[1].values.push({ 'x': valX, 'y': utilizacaoMemoria.memoriaLivre / (1024 * 1024 * 1024) });

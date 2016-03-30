@@ -54,10 +54,10 @@
         duration: 700,
         enabled: true
       },
-      barColor: '#2C3E50',
+      barColor: '#a3297a',
       // trackColor: colors.byName('inverse'),
       scaleColor: false,
-      lineWidth: 20,
+      lineWidth: 35,
       lineCap: 'circle',
     };
 

@@ -9,8 +9,6 @@ var monitorMemoriaId;
 // Configuração de socket para monitoramento de desempenho
 module.exports = function (io, socket) {
 
-  /**  Métodos para monitoramento da memória */
-
   socket.on('start_monitor_memoria', function () {
     if(monitorMemoriaId === undefined) {
       atualizaPercentuaisMemoria();
@@ -48,10 +46,44 @@ module.exports = function (io, socket) {
   });
 
   function dadosMemoria(callback) {
-    var memoriaTotal = os.totalmem();
-    var memoriaLivre = os.freemem();
+    var free = exec('free -m');
 
-    callback({ 'memoriaTotal': memoriaTotal, 'memoriaLivre': memoriaLivre });
+    free.stdout.on('data', function (data) {
+      var dados = {};
+      dados.memory = {};
+      var lines = data.split('\n');
+
+      // 2nd line
+      var tokens = lines[1].split(/\s+/);
+      dados.memory.physical = {};
+      dados.memory.physical.total = Number(tokens[1]);
+      dados.memory.physical.used = Number(tokens[2]);
+      dados.memory.physical.free = Number(tokens[3]);
+      dados.memory.physical.shared = Number(tokens[4]);
+      dados.memory.physical.buffers = Number(tokens[5]);
+      dados.memory.physical.cached = Number(tokens[6]);
+
+      // 3th line
+      tokens = lines[2].split(/\s+/);
+      dados.memory.swap = {};
+      dados.memory.swap.total = Number(tokens[1]);
+      dados.memory.swap.used = Number(tokens[2]);
+      dados.memory.swap.free = Number(tokens[3]);
+
+      var resume = { physical: { used: {} }, swap: { used: {} } };
+      resume.physical.used = (dados.memory.physical.used / dados.memory.physical.total * 100).toFixed(2);
+      resume.swap.used = (dados.memory.swap.used / dados.memory.swap.total * 100).toFixed(2);
+
+
+      callback(resume);
+    });
+
+
+
+    // var memoriaTotal = os.totalmem();
+    // var memoriaLivre = os.freemem();
+    //
+    // callback({ 'memoriaTotal': memoriaTotal, 'memoriaLivre': memoriaLivre });
   }
 
 };
