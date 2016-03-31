@@ -19,8 +19,6 @@
 
     function init() {
 
-      console.log('init discos');
-
       // If user is not signed in then redirect back home
       if (!Authentication.user) {
         $state.go('home');
@@ -37,7 +35,12 @@
       }, 600000);
 
       Socket.on('utilizacao_discos', function(dadosDiscos){
-        vm.discos = dadosDiscos;
+        vm.dadosDiscos = [];
+
+        for (var i = 0; i < dadosDiscos.length; i++) {
+          var disco = dadosDiscos[i];
+          vm.dadosDiscos.push({ 'disco': disco, 'data': [{ key: 'Utilizado', y: disco.uso }, { key: 'Livre', y: 100 - disco.uso }] });
+        }
       });
 
       /*$scope.$on('$destroy', function () {
@@ -57,8 +60,34 @@
       barColor: '#a3297a',
       // trackColor: colors.byName('inverse'),
       scaleColor: false,
-      lineWidth: 35,
+      lineWidth: 30,
       lineCap: 'circle',
+    };
+
+    vm.options = {
+      chart: {
+        type: 'pieChart',
+        height: 200,
+        x: function(d){return d.key;},
+        y: function(d){return d.y;},
+        showLabels: false,
+        duration: 500,
+        labelThreshold: 0.01,
+        labelSunbeamLayout: true,
+        tooltip: {
+          valueFormatter: function(d) {
+            return d3.format(',.2f')(d) + ' %';
+          }
+        },
+        legend: {
+          margin: {
+            top: 5,
+            right: 35,
+            bottom: 5,
+            left: 0
+          }
+        }
+      }
     };
 
   }

@@ -46,7 +46,7 @@ module.exports = function (io, socket) {
   });
 
   function dadosDisco(callback) {
-    var df = exec('df -mT -x tmpfs -x rootfs -x devtmpfs --block-size=1');
+    var df = exec('df -T -x tmpfs -x rootfs -x devtmpfs --block-size=1');
 
     df.stdout.on('data', function (data) {
       var discos = [];
@@ -64,10 +64,10 @@ module.exports = function (io, socket) {
 
           var disco = { 'montagem': camposLimpos[0].trim(),
                         'tipo': camposLimpos[1].trim(),
-                        'tamanho': (Number(camposLimpos[2].trim()) / (1024 * 1024 * 1024)).toFixed(2),
-                        'usado': camposLimpos[3].trim(),
-                        'disponival': camposLimpos[4].trim(),
-                        'uso': Number(camposLimpos[5].trim().replace('%', '')),
+                        'tamanho': (Number(camposLimpos[2].trim()) / (1024 * 1024)).toFixed(2),
+                        'usado': (Number(camposLimpos[3].trim()) / (1024 * 1024)).toFixed(2),
+                        'disponivel': camposLimpos[4].trim(),
+                        'uso': (Number(camposLimpos[3].trim()) / Number(camposLimpos[2].trim()) * 100).toFixed(2),
                         'particao': camposLimpos[6].trim()
                       };
           discos.push(disco);
