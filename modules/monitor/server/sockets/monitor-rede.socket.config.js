@@ -15,7 +15,7 @@ module.exports = function (io, socket) {
       atualizaPercentuaisRede();
       monitorRedeId = setInterval(function() {
         atualizaPercentuaisRede();
-      }, 10000);
+      }, 3000);
     }
   });
 
@@ -47,12 +47,6 @@ module.exports = function (io, socket) {
   });
 
   function dadosRede(callback) {
-    iplink();
-    callback({});
-  }
-
-  function iplink() {
-
     var ip = exec('ip -s link');
 
     ip.stdout.on('data', function (data) {
@@ -95,9 +89,10 @@ module.exports = function (io, socket) {
         }
         state = (state + 1) % 6;
       }
-      console.log(dados.network.interface);
-    });
 
+      callback(dados.network.interface);
+
+    });
   }
 
 };
